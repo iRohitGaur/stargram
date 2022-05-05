@@ -2,8 +2,8 @@ import { ChangeEvent } from "react";
 import { AxiosResponse } from "axios";
 
 export interface AuthProps {
-  toggleLogin: Function;
-  setLoading: Function;
+  toggleLogin: () => void;
+  setLoading: (loading: boolean) => void;
 }
 
 export interface Input extends ChangeEvent<HTMLInputElement> {}
