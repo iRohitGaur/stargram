@@ -26,6 +26,11 @@ body {
   color: $text;
   font-size: 1.6rem;
 }
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
 .sui_red {
   background: $red;
 }
@@ -55,4 +60,28 @@ body {
 }
 .sui_primary_icon {
   color: $primarydark2;
+}
+
+.stg_btn {
+  background: $primary;
+  border: $border;
+  border-radius: 4px;
+  color: $white;
+  cursor: pointer;
+  padding: 5px 1rem;
+  width: 80%;
+}
+.stg_btn:hover {
+  background: $primarylight1;
+}
+
+.stg_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(2px);
 }

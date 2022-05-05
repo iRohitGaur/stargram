@@ -27,6 +27,11 @@ body {
   font-size: 1.6rem;
 }
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
 .sui_red {
   background: red;
 }
@@ -65,5 +70,32 @@ body {
 
 .sui_primary_icon {
   color: var(--PRIMARY-DARK2);
+}
+
+.stg_btn {
+  background: var(--PRIMARY);
+  border: 1px solid #ababab;
+  border-radius: 4px;
+  color: var(--WHITE);
+  cursor: pointer;
+  padding: 5px 1rem;
+  width: 80%;
+}
+
+.stg_btn:hover {
+  background: var(--PRIMARY-LIGHT1);
+}
+
+.stg_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
 }
 /*# sourceMappingURL=index.css.map */
