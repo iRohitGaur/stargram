@@ -6,6 +6,10 @@ export interface AuthProps {
   setLoading: (loading: boolean) => void;
 }
 
+export interface PostProps {
+  post: Post;
+}
+
 export interface Input extends ChangeEvent<HTMLInputElement> {}
 
 export interface Response extends AxiosResponse {
@@ -17,6 +21,7 @@ export interface Response extends AxiosResponse {
 }
 
 export interface User {
+  _id?: string;
   username: string;
   password?: string;
   name: string;
@@ -27,16 +32,18 @@ export interface User {
 }
 
 export interface Post {
+  _id?: string;
+  timestamp: number;
   title: string;
   caption: string;
   photo: string;
-  owner: { _id: string };
+  owner: User;
   likes: [string];
   comments: [
     {
       _id?: string;
       comment: string;
-      owner: { _id: string };
+      owner: User;
     }
   ];
 }

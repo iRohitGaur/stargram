@@ -19,6 +19,7 @@ export const useAxios = () => {
       setLoading(true);
       const result = await axios.request(params);
       setResponse(result.data);
+      return result.data;
     } catch (error: any) {
       if (
         error instanceof AxiosError &&
@@ -28,6 +29,7 @@ export const useAxios = () => {
         setError(error.response.data.error);
         sendToast(error.response.data.error, true);
       }
+      return null;
     } finally {
       setLoading(false);
     }

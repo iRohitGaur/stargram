@@ -132,3 +132,130 @@ export function NotoV1Owl(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function FluentHome16Regular(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        d="M7.313 1.262a1 1 0 0 1 1.374 0l4.844 4.579c.3.283.469.678.469 1.09v5.57a1.5 1.5 0 0 1-1.5 1.5h-2A1.5 1.5 0 0 1 9 12.5V10a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v2.5A1.5 1.5 0 0 1 5.5 14h-2A1.5 1.5 0 0 1 2 12.5V6.93c0-.412.17-.807.47-1.09l4.843-4.58ZM8 1.988l-4.844 4.58A.5.5 0 0 0 3 6.93v5.57a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V10a1.5 1.5 0 0 1 1.5-1.5h1A1.5 1.5 0 0 1 10 10v2.5a.5.5 0 0 0 .5.5h2a.5.5 0 0 0 .5-.5V6.93a.5.5 0 0 0-.156-.363L8 1.988Z"
+      ></path>
+    </svg>
+  );
+}
+
+export function FluentHome16Filled(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 16 16" {...props}>
+      <path
+        fill="currentColor"
+        d="M8.687 1.262a1 1 0 0 0-1.374 0L2.469 5.84A1.5 1.5 0 0 0 2 6.931v5.57A1.5 1.5 0 0 0 3.5 14H5a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5v2.5A1.5 1.5 0 0 0 11 14h1.5a1.5 1.5 0 0 0 1.5-1.5V6.93a1.5 1.5 0 0 0-.47-1.09L8.687 1.26Z"
+      ></path>
+    </svg>
+  );
+}
+
+export function ClarityBoltLine(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2rem" height="2rem" viewBox="0 0 36 36" {...props}>
+      <path
+        fill="currentColor"
+        d="M10.52 34h-3a1 1 0 0 1-.88-1.44L12.55 21H6a1 1 0 0 1-.85-1.54l10.68-17a1 1 0 0 1 .81-.46h13.43a1 1 0 0 1 .77 1.69L21.78 14h5.38a1 1 0 0 1 .73 1.66l-16.63 18a1 1 0 0 1-.74.34Zm-1.34-2h.91l14.77-16h-5.27a1 1 0 0 1-.77-1.69L27.88 4H17.19L7.77 19h6.43a1 1 0 0 1 .88 1.44Z"
+      ></path>
+      <path fill="none" d="M0 0h36v36H0z"></path>
+    </svg>
+  );
+}
+
+export function ClarityBoltSolid(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2rem" height="2rem" viewBox="0 0 36 36" {...props}>
+      <path
+        fill="currentColor"
+        d="M30.8 2.29a.49.49 0 0 0-.45-.29H16.42a.5.5 0 0 0-.42.23l-10.71 17a.49.49 0 0 0 .41.77h7.67L6.6 33.25a.52.52 0 0 0 .46.75h3a.5.5 0 0 0 .37-.16L28 14.85a.5.5 0 0 0-.37-.85h-6.74l9.83-11.18a.49.49 0 0 0 .08-.53Z"
+      ></path>
+      <path fill="none" d="M0 0h36v36H0z"></path>
+    </svg>
+  );
+}
+
+export function IcRoundBookmarkBorder(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3l7 3V5c0-1.1-.9-2-2-2zm0 15l-5-2.18L7 18V6c0-.55.45-1 1-1h8c.55 0 1 .45 1 1v12z"
+      ></path>
+    </svg>
+  );
+}
+
+export function IcRoundBookmark(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3l7 3V5c0-1.1-.9-2-2-2z"
+      ></path>
+    </svg>
+  );
+}
+
+export function RiUser6Line(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-4.783 4.995L12 15a5 5 0 0 1-5-5V7a5 5 0 0 1 4.783-4.995L12 2zm0 2a3 3 0 0 0-2.995 2.824L9 7v3a3 3 0 0 0 5.995.176L15 10V7a3 3 0 0 0-3-3z"
+      ></path>
+    </svg>
+  );
+}
+
+export function RiUser6Fill(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M12 17c3.662 0 6.865 1.575 8.607 3.925l-1.842.871C17.347 20.116 14.847 19 12 19c-2.847 0-5.347 1.116-6.765 2.796l-1.841-.872C5.136 18.574 8.338 17 12 17zm0-15a5 5 0 0 1 5 5v3a5 5 0 0 1-10 0V7a5 5 0 0 1 5-5z"
+      ></path>
+    </svg>
+  );
+}
+
+export function MdiCardsHeartOutline(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="m12.1 18.55l-.1.1l-.11-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04 1 3.57 2.36h1.86C13.46 6 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05M16.5 3c-1.74 0-3.41.81-4.5 2.08C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.41 2 8.5c0 3.77 3.4 6.86 8.55 11.53L12 21.35l1.45-1.32C18.6 15.36 22 12.27 22 8.5C22 5.41 19.58 3 16.5 3Z"
+      ></path>
+    </svg>
+  );
+}
+
+export function MdiCardsHeart(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="m12 21.35l-1.45-1.32C5.4 15.36 2 12.27 2 8.5C2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z"
+      ></path>
+    </svg>
+  );
+}
+
+export function TablerMessageCircle2(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="m3 20l1.3-3.9A9 8 0 1 1 7.7 19L3 20"
+      ></path>
+    </svg>
+  );
+}

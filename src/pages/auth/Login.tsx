@@ -1,15 +1,18 @@
 import { FC, useState, useEffect } from "react";
-import { AuthProps, Input } from "Interfaces";
+import { AuthProps, Input, User } from "Interfaces";
 import { isValidPassword } from "Validators";
 import { useAxios } from "utils";
 import { useToast } from "utils/useToast";
+import { useDispatch } from "react-redux";
+import { setUser } from "reducers/userSlice";
 
 const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   const initialState = { usernameOrEmail: "", password: "" };
   const [loginForm, setLoginForm] = useState(initialState);
   const { usernameOrEmail, password } = loginForm;
-  const { response, operation, loading } = useAxios();
+  const { operation, loading } = useAxios();
   const { sendToast } = useToast();
+  const dispatch = useDispatch();
 
   const handleUsernameOrEmail = (e: Input) => {
     setLoginForm((s) => ({ ...s, usernameOrEmail: e.target.value }));
@@ -19,26 +22,24 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
     setLoginForm((s) => ({ ...s, password: e.target.value }));
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (isValidPassword(password)) {
-      operation({
+      const response = await operation({
         method: "post",
         url: "/login",
         data: { usernameOrEmail, password },
       });
+      const user = response.user as unknown as User;
+      if (user && response.token) {
+        localStorage.setItem("stargram-user-token", response.token);
+        setLoginForm(initialState);
+        sendToast(response.message);
+        dispatch(setUser(user));
+      }
     } else {
       sendToast("invalid username or password", true);
     }
   };
-
-  useEffect(() => {
-    if (response) {
-      // TODO: set token in localStorage and user in Redux store
-      setLoginForm(initialState);
-      sendToast(response.message ?? "");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response]);
 
   useEffect(() => {
     setLoading(loading);

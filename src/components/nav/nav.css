@@ -1,0 +1,45 @@
+.nav_wrapper {
+  background: var(--BG-COMPONENTS);
+  border-bottom: 1px solid #ababab99;
+  padding: 1rem 2rem;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.nav_wrapper .logo {
+  font-size: 2.5rem;
+}
+
+.nav_wrapper .cta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav_wrapper .cta a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav_wrapper .cta svg {
+  color: var(--TEXT);
+}
+/*# sourceMappingURL=nav.css.map */
