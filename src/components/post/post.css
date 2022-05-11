@@ -22,6 +22,7 @@
           flex-direction: column;
   background: var(--BG-COMPONENTS);
   border: 1px solid #ababab99;
+  border-radius: 4px;
   padding: 12px;
   margin: auto;
   max-width: 624px;
@@ -159,7 +160,7 @@
 }
 
 .posts_wrapper .post_wrapper .post_time {
-  color: #ababab;
+  color: #707070;
   font-size: 1.2rem;
   padding-bottom: 5px;
 }

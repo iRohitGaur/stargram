@@ -9,6 +9,7 @@
     @include flex(1rem, column);
     background: $bg-components;
     border: 1px solid $grayOp5;
+    border-radius: 4px;
     padding: 12px;
     margin: auto;
     max-width: 624px;
@@ -109,7 +110,7 @@
     }
 
     .post_time {
-      color: $gray;
+      color: $textgray;
       font-size: 1.2rem;
       padding-bottom: 5px;
     }

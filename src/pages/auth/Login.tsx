@@ -4,7 +4,7 @@ import { isValidPassword } from "Validators";
 import { useAxios } from "utils";
 import { useToast } from "utils/useToast";
 import { useDispatch } from "react-redux";
-import { setUser } from "reducers/userSlice";
+import { setToken, setUser } from "reducers/userSlice";
 
 const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   const initialState = { usernameOrEmail: "", password: "" };
@@ -22,19 +22,26 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
     setLoginForm((s) => ({ ...s, password: e.target.value }));
   };
 
-  const handleLogin = async () => {
-    if (isValidPassword(password)) {
+  const handleLogin = async (guest: boolean) => {
+    if (isValidPassword(password) || guest) {
       const response = await operation({
         method: "post",
         url: "/login",
-        data: { usernameOrEmail, password },
+        data: {
+          usernameOrEmail: guest ? "guest@rohit.xyz" : usernameOrEmail,
+          password: guest ? "guest@123" : password,
+        },
       });
       const user = response.user as unknown as User;
-      if (user && response.token) {
-        localStorage.setItem("stargram-user-token", response.token);
+      const token = response.token as unknown as string;
+
+      if (user && token) {
+        localStorage.setItem("stargram-user-token", token);
         setLoginForm(initialState);
         sendToast(response.message);
+
         dispatch(setUser(user));
+        dispatch(setToken(token));
       }
     } else {
       sendToast("invalid username or password", true);
@@ -62,8 +69,11 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
         value={password}
         onChange={(e) => handlePassword(e)}
       />
-      <button className="stg_btn" onClick={handleLogin}>
+      <button className="stg_btn" onClick={() => handleLogin(false)}>
         Login
+      </button>
+      <button className="stg_btn" onClick={() => handleLogin(true)}>
+        Use Guest Login
       </button>
       <p className="toggle_auth">
         Don't have an account?{" "}

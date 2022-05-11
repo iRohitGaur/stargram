@@ -1,7 +1,7 @@
 import { FC } from "react";
 import {
-  ClarityBoltLine,
-  ClarityBoltSolid,
+  HeroiconsOutlineLightningBolt,
+  HeroiconsSolidLightningBolt,
   IcRoundBookmark,
   IcRoundBookmarkBorder,
   RiUser6Fill,
@@ -15,25 +15,35 @@ import "./nav.css";
 export const Nav: FC = () => {
   const { pathname } = useLocation();
   return (
-    <div className="nav_wrapper">
-      <div className="logo">Stargram</div>
-      <div className="cta">
-        <NavLink to={"/"}>
-          {pathname === "/" ? <FluentHome16Filled /> : <FluentHome16Regular />}
-        </NavLink>
-        <NavLink to={"/explore"}>
-          {pathname === "/explore" ? <ClarityBoltSolid /> : <ClarityBoltLine />}
-        </NavLink>
-        <NavLink to={"/bookmarks"}>
-          {pathname === "/bookmarks" ? (
-            <IcRoundBookmark />
-          ) : (
-            <IcRoundBookmarkBorder />
-          )}
-        </NavLink>
-        <NavLink to={"/profile"}>
-          {pathname === "/profile" ? <RiUser6Fill /> : <RiUser6Line />}
-        </NavLink>
+    <div className="nav_content">
+      <div className="nav_wrapper">
+        <div className="logo">Stargram</div>
+        <div className="cta">
+          <NavLink to={"/"}>
+            {pathname === "/" ? (
+              <FluentHome16Filled />
+            ) : (
+              <FluentHome16Regular />
+            )}
+          </NavLink>
+          <NavLink to={"/explore"}>
+            {pathname === "/explore" ? (
+              <HeroiconsSolidLightningBolt />
+            ) : (
+              <HeroiconsOutlineLightningBolt />
+            )}
+          </NavLink>
+          <NavLink to={"/bookmarks"}>
+            {pathname === "/bookmarks" ? (
+              <IcRoundBookmark />
+            ) : (
+              <IcRoundBookmarkBorder />
+            )}
+          </NavLink>
+          <NavLink to={"/profile"}>
+            {pathname === "/profile" ? <RiUser6Fill /> : <RiUser6Line />}
+          </NavLink>
+        </div>
       </div>
     </div>
   );

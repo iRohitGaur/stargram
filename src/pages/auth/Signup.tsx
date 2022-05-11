@@ -13,7 +13,7 @@ const Signup: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   const initialState = { name: "", username: "", email: "", password: "" };
   const [signupForm, setSignupForm] = useState(initialState);
   const { name, username, email, password } = signupForm;
-  const { response, operation, loading } = useAxios();
+  const { operation, loading } = useAxios();
   const { sendToast } = useToast();
 
   const handleName = (e: Input) => {
@@ -33,15 +33,6 @@ const Signup: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   };
 
   useEffect(() => {
-    if (response) {
-      toggleLogin();
-      setSignupForm(initialState);
-      sendToast(response.message ?? "");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [response]);
-
-  useEffect(() => {
     setLoading(loading);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
@@ -53,11 +44,18 @@ const Signup: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
       isValidEmail(email) &&
       isValidPassword(password)
     ) {
-      operation({
-        method: "post",
-        url: "/signup",
-        data: { name, username, email, password },
-      });
+      (async () => {
+        const response = await operation({
+          method: "post",
+          url: "/signup",
+          data: { name, username, email, password },
+        });
+        if (response) {
+          toggleLogin();
+          setSignupForm(initialState);
+          sendToast(response.message ?? "");
+        }
+      })();
     } else {
       sendToast(
         "Name and Username should be more than 3 characters.\n\nPassword should be more than 5 characters",

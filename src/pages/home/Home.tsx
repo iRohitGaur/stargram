@@ -12,19 +12,21 @@ export const Home: FC = () => {
   const timeline = useSelector((state: RootState) => state.posts.timelinePosts);
   const { loading, operation } = useAxios();
   const dispatch = useDispatch();
+  const { user } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
-    (async () => {
-      const response = await operation({
-        method: "get",
-        url: "/timeline",
-      });
-
-      const posts = response.posts as unknown as Post[];
-      dispatch(timelinePosts(posts));
-    })();
+    if (user && timeline.length === 0) {
+      (async () => {
+        const response = await operation({
+          method: "get",
+          url: "/timeline",
+        });
+        const posts = response.posts as unknown as Post[];
+        dispatch(timelinePosts(posts));
+      })();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   return (
     <div className="homepage_wrapper">

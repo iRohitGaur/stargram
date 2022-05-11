@@ -15,5 +15,5 @@ export const isValidName = (name: string) => {
 };
 
 export const isValidUsername = (username: string) => {
-  return username.length > 2;
+  return username.length > 2 && username.length < 16;
 };

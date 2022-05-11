@@ -52,3 +52,8 @@ export interface Like {
   postId: string;
   userId: string;
 }
+
+export interface UserSliceState {
+  user: User | null;
+  token: string | null;
+}

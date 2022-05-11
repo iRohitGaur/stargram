@@ -60,13 +60,29 @@ export const PostCard: FC<PostProps> = ({ post }) => {
         </div>
         <PostCta />
         <div className="likes_comments_wrapper">
-          <p className="post_likes">{post.comments.length} likes</p>
+          <p className="post_likes">{post.likes.length} likes</p>
           <PostCaption />
-          <PostComments />
           <div className="post_time">
             {new Date(post.timestamp).toLocaleString()}
           </div>
-          <AddCommentWrapper />
+          <PostComments />
+          <div className="add_comment_wrapper">
+            <input
+              className="add_comment_input"
+              value={comment}
+              type="text"
+              placeholder="Add a comment..."
+              onChange={handleCommentInput}
+            />
+            <button
+              className={`post_comment_btn ${
+                comment.trim().length === 0 && "disabled_btn"
+              }`}
+              onClick={handleCommentPost}
+            >
+              Post
+            </button>
+          </div>
         </div>
       </div>
       {loading && (
@@ -125,7 +141,7 @@ export const PostCard: FC<PostProps> = ({ post }) => {
           }{" "}
           {captionState
             ? post.caption
-            : post.caption.substring(0, 185 - post.owner.username.length)}
+            : post.caption.substring(0, 160 - post.owner.username.length)}
           {"... "}
           {
             <button
@@ -152,37 +168,24 @@ export const PostCard: FC<PostProps> = ({ post }) => {
             </div>
           ))
         ) : post.comments.length > 0 ? (
-          <button
-            className="view_all_comments"
-            onClick={() => setCommentState((c) => !c)}
-          >
-            view all {post.comments.length} comments
-          </button>
+          post.comments.length === 1 ? (
+            <button
+              className="view_all_comments"
+              onClick={() => setCommentState((c) => !c)}
+            >
+              view 1 comment
+            </button>
+          ) : (
+            <button
+              className="view_all_comments"
+              onClick={() => setCommentState((c) => !c)}
+            >
+              view all {post.comments.length} comments
+            </button>
+          )
         ) : (
           ""
         )}
-      </div>
-    );
-  }
-
-  function AddCommentWrapper() {
-    return (
-      <div className="add_comment_wrapper">
-        <input
-          className="add_comment_input"
-          value={comment}
-          type="text"
-          placeholder="Add a comment..."
-          onChange={handleCommentInput}
-        />
-        <button
-          className={`post_comment_btn ${
-            comment.trim().length === 0 && "disabled_btn"
-          }`}
-          onClick={handleCommentPost}
-        >
-          Post
-        </button>
       </div>
     );
   }

@@ -17,7 +17,8 @@ const App: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
+    const token = localStorage.getItem("stargram-user-token");
+    if (!user && token) {
       (async () => {
         const response = await operation({
           method: "get",

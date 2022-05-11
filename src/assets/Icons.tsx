@@ -155,26 +155,30 @@ export function FluentHome16Filled(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function ClarityBoltLine(props: SVGProps<SVGSVGElement>) {
+export function HeroiconsOutlineLightningBolt(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg width="2rem" height="2rem" viewBox="0 0 36 36" {...props}>
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
       <path
-        fill="currentColor"
-        d="M10.52 34h-3a1 1 0 0 1-.88-1.44L12.55 21H6a1 1 0 0 1-.85-1.54l10.68-17a1 1 0 0 1 .81-.46h13.43a1 1 0 0 1 .77 1.69L21.78 14h5.38a1 1 0 0 1 .73 1.66l-16.63 18a1 1 0 0 1-.74.34Zm-1.34-2h.91l14.77-16h-5.27a1 1 0 0 1-.77-1.69L27.88 4H17.19L7.77 19h6.43a1 1 0 0 1 .88 1.44Z"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M13 10V3L4 14h7v7l9-11h-7Z"
       ></path>
-      <path fill="none" d="M0 0h36v36H0z"></path>
     </svg>
   );
 }
 
-export function ClarityBoltSolid(props: SVGProps<SVGSVGElement>) {
+export function HeroiconsSolidLightningBolt(props: SVGProps<SVGSVGElement>) {
   return (
-    <svg width="2rem" height="2rem" viewBox="0 0 36 36" {...props}>
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 20 20" {...props}>
       <path
         fill="currentColor"
-        d="M30.8 2.29a.49.49 0 0 0-.45-.29H16.42a.5.5 0 0 0-.42.23l-10.71 17a.49.49 0 0 0 .41.77h7.67L6.6 33.25a.52.52 0 0 0 .46.75h3a.5.5 0 0 0 .37-.16L28 14.85a.5.5 0 0 0-.37-.85h-6.74l9.83-11.18a.49.49 0 0 0 .08-.53Z"
+        fillRule="evenodd"
+        d="M11.3 1.046A1 1 0 0 1 12 2v5h4a1 1 0 0 1 .82 1.573l-7 10A1 1 0 0 1 8 18v-5H4a1 1 0 0 1-.82-1.573l7-10a1 1 0 0 1 1.12-.38Z"
+        clipRule="evenodd"
       ></path>
-      <path fill="none" d="M0 0h36v36H0z"></path>
     </svg>
   );
 }
