@@ -63,6 +63,7 @@
 .posts_wrapper .post_wrapper .post_image .post_img {
   -o-object-fit: cover;
      object-fit: cover;
+  margin: auto;
 }
 
 .posts_wrapper .post_wrapper .post_cta {

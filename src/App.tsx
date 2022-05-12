@@ -2,13 +2,14 @@ import { FC, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Nav, PrivateRoute, RestrictedRoute } from "./components";
-import { Auth, Home, Page404, Profile } from "./pages";
+import { Auth, Home, OtherProfile, Page404, Profile } from "./pages";
 import "react-toastify/dist/ReactToastify.css";
 import { RootState } from "store";
 import { useDispatch, useSelector } from "react-redux";
 import { useAxios } from "utils";
 import { setUser } from "reducers/userSlice";
-import { Grid } from "react-loader-spinner";
+import { Grid as Loader } from "react-loader-spinner";
+import EditProfile from "pages/profile/EditProfile";
 
 const App: FC = () => {
   const { pathname } = useLocation();
@@ -39,14 +40,18 @@ const App: FC = () => {
 
       <Routes>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/" element={<Home />} />
+          {user && <Route path={`/${user.username}`} element={<Profile />} />}
+          {user && (
+            <Route path={`/${user.username}/edit`} element={<EditProfile />} />
+          )}
         </Route>
 
         <Route element={<RestrictedRoute />}>
           <Route path="/auth" element={<Auth />} />
         </Route>
 
+        <Route path="/:username" element={<OtherProfile />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
 
@@ -54,7 +59,12 @@ const App: FC = () => {
 
       {loading && (
         <div className="stg_loader">
-          <Grid height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
+          <Loader
+            height="150"
+            width="150"
+            color="#1a8d1a"
+            ariaLabel="loading"
+          />
         </div>
       )}
     </>

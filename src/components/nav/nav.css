@@ -32,6 +32,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 1.5rem;
+  position: relative;
 }
 
 .nav_content .nav_wrapper .cta a {
@@ -46,5 +47,60 @@
 
 .nav_content .nav_wrapper .cta svg {
   color: var(--TEXT);
+}
+
+.nav_content .nav_wrapper .cta .profile_btn {
+  background: none;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  max-height: 2.5rem;
+  max-width: 2.5rem;
+  overflow: hidden;
+  padding: 0;
+}
+
+.nav_content .nav_wrapper .cta .profile_dropdown {
+  background: var(--BG-COMPONENTS);
+  -webkit-box-shadow: 0px 0px 2px #ababab;
+          box-shadow: 0px 0px 2px #ababab;
+  position: absolute;
+  top: 42px;
+  right: -10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav_content .nav_wrapper .cta .profile_dropdown .dd_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  color: var(--TEXT);
+  font-size: 1.8rem;
+  font-weight: 500;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  width: 100%;
+}
+
+.nav_content .nav_wrapper .cta .profile_dropdown .dd_row:hover {
+  background: var(--BG);
+  cursor: pointer;
 }
 /*# sourceMappingURL=nav.css.map */

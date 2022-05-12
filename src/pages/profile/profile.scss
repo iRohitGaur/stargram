@@ -1,0 +1,135 @@
+@import "../../styles/index.scss";
+
+.profile_wrapper {
+  height: 100%;
+  margin: auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+
+  .about_section {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    padding-bottom: 2rem;
+
+    .profile_photo {
+      border-radius: 50%;
+      cursor: pointer;
+      margin: auto;
+      max-height: 150px;
+      max-width: 150px;
+      overflow: hidden;
+      position: relative;
+
+      img {
+        z-index: 2;
+      }
+
+      .file_input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        display: none;
+      }
+    }
+
+    .profile_info {
+      @include flex(2rem, column);
+
+      a {
+        text-decoration: none;
+        cursor: pointer;
+        color: $primary;
+      }
+
+      .username {
+        @include flex(2rem, null, center);
+        font-size: 2.4rem;
+        font-weight: 500;
+
+        button {
+          cursor: pointer;
+          font-size: 1.4rem;
+          height: 2.5rem;
+          padding: 0 1rem;
+        }
+      }
+
+      .following_followers {
+        @include flex(1rem, null, center, space-between);
+        max-width: 250px;
+
+        p {
+          font-size: 1.5rem;
+
+          span {
+            font-weight: 500;
+          }
+        }
+      }
+
+      .profile_name {
+        font-weight: 600;
+      }
+    }
+  }
+
+  .user_posts {
+    border-top: 1px solid $gray;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 0;
+
+    .post_photo_wrapper {
+      max-height: 280px;
+      aspect-ratio: 1/1;
+
+      .post_photo {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+.user_not_found {
+  text-align: center;
+}
+
+.edit_profile_wrapper {
+  @include flex(1rem, column, center, center);
+  padding: 2rem 0;
+  height: 100%;
+  width: 100%;
+
+  .edit_profile_row {
+    width: 300px;
+    @include flex(1rem, null, center, space-between);
+
+    input {
+      border-radius: 4px;
+      border: 1px solid $textgray;
+      padding: 5px 10px;
+      outline-color: $primary;
+    }
+  }
+
+  .update_profile_btn {
+    background: $primary;
+    border: none;
+    border-radius: 4px;
+    color: $white;
+    cursor: pointer;
+    padding: 8px 1rem;
+    width: 300px;
+    transition: background-color 0.3s ease;
+  }
+
+  .update_profile_btn:hover {
+    background: $primarylight1;
+  }
+}
