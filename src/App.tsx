@@ -2,7 +2,15 @@ import { FC, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Nav, PrivateRoute, RestrictedRoute } from "./components";
-import { Auth, Home, OtherProfile, Page404, Profile } from "./pages";
+import {
+  Auth,
+  Bookmarks,
+  Explore,
+  Home,
+  OtherProfile,
+  Page404,
+  Profile,
+} from "./pages";
 import "react-toastify/dist/ReactToastify.css";
 import { RootState } from "store";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,6 +49,8 @@ const App: FC = () => {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
           {user && <Route path={`/${user.username}`} element={<Profile />} />}
           {user && (
             <Route path={`/${user.username}/edit`} element={<EditProfile />} />

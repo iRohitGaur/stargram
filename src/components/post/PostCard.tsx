@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "reducers/postsSlice";
 import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
+import { setUser } from "reducers/userSlice";
 
 export const PostCard: FC<PostProps> = ({ post }) => {
   const [captionState, setCaptionState] = useState(false);
@@ -49,6 +50,17 @@ export const PostCard: FC<PostProps> = ({ post }) => {
     });
     const updatedPost = response as unknown as Post;
     dispatch(updatePost(updatedPost));
+  };
+
+  const handleBookmarkPost = async () => {
+    const response = await operation({
+      method: "put",
+      url: "/bookmark",
+      data: { postId: post._id },
+    });
+
+    const updatedUser = response as unknown as User;
+    dispatch(setUser(updatedUser));
   };
 
   return (
@@ -87,7 +99,12 @@ export const PostCard: FC<PostProps> = ({ post }) => {
       </div>
       {loading && (
         <div className="stg_loader">
-          <Loader height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
+          <Loader
+            height="150"
+            width="150"
+            color="#1a8d1a"
+            ariaLabel="loading"
+          />
         </div>
       )}
     </div>
@@ -122,8 +139,12 @@ export const PostCard: FC<PostProps> = ({ post }) => {
           </button>
         </div>
         <div className="right_section">
-          <button className="cta_btn bookmark_btn">
-            <IcRoundBookmarkBorder />
+          <button className="cta_btn bookmark_btn" onClick={handleBookmarkPost}>
+            {user.bookmarks.includes(post._id ?? "") ? (
+              <IcRoundBookmark />
+            ) : (
+              <IcRoundBookmarkBorder />
+            )}
           </button>
         </div>
       </div>
