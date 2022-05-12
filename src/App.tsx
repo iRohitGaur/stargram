@@ -51,10 +51,8 @@ const App: FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
-          {user && <Route path={`/${user.username}`} element={<Profile />} />}
-          {user && (
-            <Route path={`/${user.username}/edit`} element={<EditProfile />} />
-          )}
+          <Route path={`/${user?.username}`} element={<Profile />} />
+          <Route path={`/${user?.username}/edit`} element={<EditProfile />} />
         </Route>
 
         <Route element={<RestrictedRoute />}>
