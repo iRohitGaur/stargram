@@ -72,7 +72,9 @@ export const PostCard: FC<PostProps> = ({ post }) => {
         </div>
         <PostCta />
         <div className="likes_comments_wrapper">
-          <p className="post_likes">{post.likes.length} likes</p>
+          <p className="post_likes">{`${post.likes.length} ${
+            post.likes.length === 1 ? "like" : "likes"
+          }`}</p>
           <PostCaption />
           <div className="post_time">
             {new Date(post.timestamp).toLocaleString()}
@@ -113,12 +115,14 @@ export const PostCard: FC<PostProps> = ({ post }) => {
   function PostHeader() {
     return (
       <div className="post_header">
-        <img
-          className="post_owner_photo"
-          src={post.owner.photo}
-          alt={post.owner.username}
-        />
-        <div className="post_owner_username">{post.owner.username}</div>
+        <NavLink to={`/${post.owner.username}`}>
+          <img
+            className="post_owner_photo"
+            src={post.owner.photo}
+            alt={post.owner.username}
+          />
+          <div className="post_owner_username">{post.owner.username}</div>
+        </NavLink>
       </div>
     );
   }
