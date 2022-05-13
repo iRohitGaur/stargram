@@ -32,8 +32,8 @@ export const useAxios = () => {
     } catch (error: any) {
       if (
         error instanceof AxiosError &&
-        error.response &&
-        error.response.data.error
+        error?.response &&
+        error?.response?.data?.error
       ) {
         setError(error.response.data.error);
         sendToast(error.response.data.error, true);

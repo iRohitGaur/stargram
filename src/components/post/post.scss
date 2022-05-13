@@ -15,9 +15,11 @@
     max-width: 624px;
 
     .post_header {
-      @include flex(1rem, null, center);
-      height: 32px;
-      width: 100%;
+      a {
+        @include flex(1rem, null, center);
+        height: 32px;
+        width: fit-content;
+      }
 
       .post_owner_photo {
         height: 32px;
@@ -40,6 +42,7 @@
 
       .post_img {
         object-fit: cover;
+        margin: auto;
       }
     }
 

@@ -26,9 +26,12 @@ export interface User {
   password?: string;
   name: string;
   email: string;
+  bio: string;
+  website: string;
   photo: string;
   following: [string];
   followers: [string];
+  bookmarks: [string];
 }
 
 export interface Post {

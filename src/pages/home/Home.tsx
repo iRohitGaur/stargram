@@ -1,7 +1,7 @@
 import { PostCard } from "components";
 import { Post } from "Interfaces";
 import { FC, useEffect } from "react";
-import { Grid } from "react-loader-spinner";
+import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useAxios } from "utils";
 import { RootState } from "store";
@@ -39,7 +39,12 @@ export const Home: FC = () => {
       )}
       {loading && (
         <div className="stg_loader">
-          <Grid height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
+          <Loader
+            height="150"
+            width="150"
+            color="#1a8d1a"
+            ariaLabel="loading"
+          />
         </div>
       )}
     </div>

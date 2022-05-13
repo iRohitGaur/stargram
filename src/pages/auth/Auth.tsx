@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 import "./auth.css";
-import { Grid } from "react-loader-spinner";
+import { Grid as Loader } from "react-loader-spinner";
 
 export const Auth: FC = () => {
   const [showLogin, setShowLogin] = useState(true);
@@ -25,7 +25,7 @@ export const Auth: FC = () => {
       </div>
       {loading && (
         <div className="stg_loader">
-          <Grid height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
+          <Loader height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
         </div>
       )}
     </div>

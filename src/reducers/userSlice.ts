@@ -17,8 +17,13 @@ const userSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
+    logout(state) {
+      localStorage.removeItem("stargram-user-token");
+      state.user = null;
+      state.token = null;
+    },
   },
 });
 
-export const { setUser, setToken } = userSlice.actions;
+export const { setUser, setToken, logout } = userSlice.actions;
 export default userSlice.reducer;

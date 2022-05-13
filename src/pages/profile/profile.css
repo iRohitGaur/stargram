@@ -1,0 +1,289 @@
+@import url("https://starlingui.netlify.app/sui.css");
+:root {
+  --BG: #fafafa;
+  --BG-COMPONENTS: #ffffff;
+}
+
+html[sui-mode="light"] {
+  --GRAY: #d2d2d2;
+  --BTNBG: #ffffffaa;
+  --BTNBGHOVER: #ffffff;
+  --BG: #fafafa;
+  --BG-COMPONENTS: #ffffff;
+}
+
+html[sui-mode="dark"] {
+  --PRIMARY: var(--PRIMARY-LIGHT2);
+  --GRAY: #111111;
+  --BTNBG: #0d0d0daa;
+  --BTNBGHOVER: #0d0d0d;
+  --BG: #0e0f0f;
+  --BG-COMPONENTS: #000000;
+}
+
+body {
+  background: var(--BG);
+  color: var(--TEXT);
+  font-size: 1.6rem;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.sui_red {
+  background: red;
+}
+
+.sui_red_icon {
+  color: red;
+}
+
+.sui_green {
+  background: green;
+}
+
+.sui_green_icon {
+  color: green;
+}
+
+.sui_yellow {
+  background: #ed9f3a;
+}
+
+.sui_yellow_icon {
+  color: #ed9f3a;
+}
+
+.sui_orange {
+  background: #f45b19;
+}
+
+.sui_orange_icon {
+  color: #f45b19;
+}
+
+.sui_primary {
+  background: var(--PRIMARY-DARK2);
+}
+
+.sui_primary_icon {
+  color: var(--PRIMARY-DARK2);
+}
+
+.stg_btn {
+  background: var(--PRIMARY);
+  border: 1px solid #ababab;
+  border-radius: 4px;
+  color: var(--WHITE);
+  cursor: pointer;
+  padding: 5px 1rem;
+  width: 80%;
+}
+
+.stg_btn:hover {
+  background: var(--PRIMARY-LIGHT1);
+}
+
+.stg_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+
+.profile_wrapper {
+  height: 100%;
+  margin: auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.profile_wrapper .about_section {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+  padding-bottom: 2rem;
+}
+
+.profile_wrapper .about_section .profile_photo {
+  border-radius: 50%;
+  cursor: pointer;
+  margin: auto;
+  max-height: 150px;
+  max-width: 150px;
+  overflow: hidden;
+  position: relative;
+}
+
+.profile_wrapper .about_section .profile_photo img {
+  z-index: 2;
+}
+
+.profile_wrapper .about_section .profile_photo .file_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.profile_wrapper .about_section .profile_info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.profile_wrapper .about_section .profile_info a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--PRIMARY);
+}
+
+.profile_wrapper .about_section .profile_info .username {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.profile_wrapper .about_section .profile_info .username button {
+  cursor: pointer;
+  font-size: 1.4rem;
+  height: 2.5rem;
+  padding: 0 1rem;
+}
+
+.profile_wrapper .about_section .profile_info .following_followers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 250px;
+}
+
+.profile_wrapper .about_section .profile_info .following_followers p {
+  font-size: 1.5rem;
+}
+
+.profile_wrapper .about_section .profile_info .following_followers p span {
+  font-weight: 500;
+}
+
+.profile_wrapper .about_section .profile_info .profile_name {
+  font-weight: 600;
+}
+
+.profile_wrapper .user_posts {
+  border-top: 1px solid #ababab;
+  display: -ms-grid;
+  display: grid;
+  gap: 20px;
+  -ms-grid-columns: (1fr)[3];
+      grid-template-columns: repeat(3, 1fr);
+  padding: 2rem 0;
+}
+
+.profile_wrapper .user_posts .post_photo_wrapper {
+  max-height: 280px;
+  aspect-ratio: 1/1;
+}
+
+.profile_wrapper .user_posts .post_photo_wrapper .post_photo {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user_not_found {
+  text-align: center;
+}
+
+.edit_profile_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 2rem 0;
+  height: 100%;
+  width: 100%;
+}
+
+.edit_profile_wrapper .edit_profile_row {
+  width: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.edit_profile_wrapper .edit_profile_row input {
+  border-radius: 4px;
+  border: 1px solid #707070;
+  padding: 5px 10px;
+  outline-color: var(--PRIMARY);
+}
+
+.edit_profile_wrapper .update_profile_btn {
+  background: var(--PRIMARY);
+  border: none;
+  border-radius: 4px;
+  color: var(--WHITE);
+  cursor: pointer;
+  padding: 8px 1rem;
+  width: 300px;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.edit_profile_wrapper .update_profile_btn:hover {
+  background: var(--PRIMARY-LIGHT1);
+}
+/*# sourceMappingURL=profile.css.map */

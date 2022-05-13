@@ -19,6 +19,7 @@
 
     .cta {
       @include flex(1.5rem);
+      position: relative;
 
       a {
         @include flex(1rem, null, center);
@@ -26,6 +27,41 @@
 
       svg {
         color: $text;
+      }
+
+      .profile_btn {
+        background: none;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        max-height: 2.5rem;
+        max-width: 2.5rem;
+        overflow: hidden;
+        padding: 0;
+      }
+
+      .profile_dropdown {
+        background: $bg-components;
+        box-shadow: 0px 0px 2px $gray;
+        position: absolute;
+        top: 42px;
+        right: -10px;
+
+        @include flex(0, column, center);
+
+        .dd_row {
+          @include flex(1.5rem, null, center, space-between);
+          color: $text;
+          font-size: 1.8rem;
+          font-weight: 500;
+          padding: 1rem 1.5rem;
+          text-decoration: none;
+          width: 100%;
+        }
+        .dd_row:hover {
+          background: $bg;
+          cursor: pointer;
+        }
       }
     }
   }

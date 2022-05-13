@@ -12,8 +12,9 @@ import "./post.css";
 import { useAxios } from "utils";
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "reducers/postsSlice";
-import { Grid } from "react-loader-spinner";
+import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
+import { setUser } from "reducers/userSlice";
 
 export const PostCard: FC<PostProps> = ({ post }) => {
   const [captionState, setCaptionState] = useState(false);
@@ -51,6 +52,17 @@ export const PostCard: FC<PostProps> = ({ post }) => {
     dispatch(updatePost(updatedPost));
   };
 
+  const handleBookmarkPost = async () => {
+    const response = await operation({
+      method: "put",
+      url: "/bookmark",
+      data: { postId: post._id },
+    });
+
+    const updatedUser = response as unknown as User;
+    dispatch(setUser(updatedUser));
+  };
+
   return (
     <div className="posts_wrapper">
       <div key={post._id} className="post_wrapper">
@@ -60,7 +72,9 @@ export const PostCard: FC<PostProps> = ({ post }) => {
         </div>
         <PostCta />
         <div className="likes_comments_wrapper">
-          <p className="post_likes">{post.likes.length} likes</p>
+          <p className="post_likes">{`${post.likes.length} ${
+            post.likes.length === 1 ? "like" : "likes"
+          }`}</p>
           <PostCaption />
           <div className="post_time">
             {new Date(post.timestamp).toLocaleString()}
@@ -87,7 +101,12 @@ export const PostCard: FC<PostProps> = ({ post }) => {
       </div>
       {loading && (
         <div className="stg_loader">
-          <Grid height="150" width="150" color="#1a8d1a" ariaLabel="loading" />
+          <Loader
+            height="150"
+            width="150"
+            color="#1a8d1a"
+            ariaLabel="loading"
+          />
         </div>
       )}
     </div>
@@ -96,12 +115,14 @@ export const PostCard: FC<PostProps> = ({ post }) => {
   function PostHeader() {
     return (
       <div className="post_header">
-        <img
-          className="post_owner_photo"
-          src={post.owner.photo}
-          alt={post.owner.username}
-        />
-        <div className="post_owner_username">{post.owner.username}</div>
+        <NavLink to={`/${post.owner.username}`}>
+          <img
+            className="post_owner_photo"
+            src={post.owner.photo}
+            alt={post.owner.username}
+          />
+          <div className="post_owner_username">{post.owner.username}</div>
+        </NavLink>
       </div>
     );
   }
@@ -122,8 +143,12 @@ export const PostCard: FC<PostProps> = ({ post }) => {
           </button>
         </div>
         <div className="right_section">
-          <button className="cta_btn bookmark_btn">
-            <IcRoundBookmarkBorder />
+          <button className="cta_btn bookmark_btn" onClick={handleBookmarkPost}>
+            {user.bookmarks.includes(post._id ?? "") ? (
+              <IcRoundBookmark />
+            ) : (
+              <IcRoundBookmarkBorder />
+            )}
           </button>
         </div>
       </div>
