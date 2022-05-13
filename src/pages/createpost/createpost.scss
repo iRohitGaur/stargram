@@ -1,0 +1,81 @@
+@import "../../styles/variables/variables.scss";
+
+.new_post_wrapper {
+  height: 100%;
+  margin: auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 624px;
+  @include flex(2rem, column, center, center);
+
+  .new_post_image {
+    border: 1px solid $gray;
+    border-radius: 6px;
+    cursor: pointer;
+    min-height: 300px;
+    height: 100%;
+    min-width: 300px;
+    width: 100%;
+    max-width: 624px;
+    position: relative;
+
+    .file_input {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      display: none;
+    }
+
+    .new_post_img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .upload_image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      @include flex(2rem, column, center, center);
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  .caption_wrapper {
+    width: 100%;
+
+    label {
+      align-self: flex-start;
+    }
+
+    .caption {
+      border-radius: 6px;
+      width: 100%;
+      max-width: 624px;
+      outline-color: $primary;
+      padding: 1rem 1.5rem;
+    }
+  }
+
+  .create_post {
+    background: $primary;
+    border: none;
+    border-radius: 4px;
+    color: $white;
+    cursor: pointer;
+    padding: 1rem;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+
+  .create_post:hover {
+    background: $primarylight1;
+  }
+}

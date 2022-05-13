@@ -1,0 +1,109 @@
+.new_post_wrapper {
+  height: 100%;
+  margin: auto;
+  padding: 2rem;
+  width: 100%;
+  max-width: 624px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.new_post_wrapper .new_post_image {
+  border: 1px solid #ababab;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 300px;
+  height: 100%;
+  min-width: 300px;
+  width: 100%;
+  max-width: 624px;
+  position: relative;
+}
+
+.new_post_wrapper .new_post_image .file_input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.new_post_wrapper .new_post_image .new_post_img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.new_post_wrapper .new_post_image .upload_image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.new_post_wrapper .new_post_image .upload_image span {
+  font-weight: 500;
+}
+
+.new_post_wrapper .caption_wrapper {
+  width: 100%;
+}
+
+.new_post_wrapper .caption_wrapper label {
+  -ms-flex-item-align: start;
+      align-self: flex-start;
+}
+
+.new_post_wrapper .caption_wrapper .caption {
+  border-radius: 6px;
+  width: 100%;
+  max-width: 624px;
+  outline-color: var(--PRIMARY);
+  padding: 1rem 1.5rem;
+}
+
+.new_post_wrapper .create_post {
+  background: var(--PRIMARY);
+  border: none;
+  border-radius: 4px;
+  color: var(--WHITE);
+  cursor: pointer;
+  padding: 1rem;
+  width: 100%;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.new_post_wrapper .create_post:hover {
+  background: var(--PRIMARY-LIGHT1);
+}
+/*# sourceMappingURL=createpost.css.map */

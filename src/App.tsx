@@ -5,6 +5,7 @@ import { Nav, PrivateRoute, RestrictedRoute } from "./components";
 import {
   Auth,
   Bookmarks,
+  CreatePost,
   Explore,
   Home,
   OtherProfile,
@@ -51,6 +52,7 @@ const App: FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/explore" element={<Explore />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
+          <Route path="/create" element={<CreatePost />} />
           <Route path={`/${user?.username}`} element={<Profile />} />
           <Route path={`/${user?.username}/edit`} element={<EditProfile />} />
         </Route>

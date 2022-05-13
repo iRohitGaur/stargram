@@ -19,7 +19,7 @@ import { setUser } from "reducers/userSlice";
 export const PostCard: FC<PostProps> = ({ post }) => {
   const [captionState, setCaptionState] = useState(false);
   const [commentState, setCommentState] = useState(
-    post.comments.length === 1 ? true : false
+    post.comments?.length === 1 ? true : false
   );
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();

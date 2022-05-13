@@ -19,6 +19,9 @@ const postsSlice = createSlice({
     userPosts(state, action: PayloadAction<Post[]>) {
       state.userPosts = action.payload;
     },
+    addNewPost(state, action: PayloadAction<Post>) {
+      state.userPosts.push(action.payload);
+    },
     timelinePosts(state, action: PayloadAction<Post[]>) {
       state.timelinePosts = action.payload;
     },
@@ -30,5 +33,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { userPosts, timelinePosts, updatePost } = postsSlice.actions;
+export const { userPosts, addNewPost, timelinePosts, updatePost } =
+  postsSlice.actions;
 export default postsSlice.reducer;

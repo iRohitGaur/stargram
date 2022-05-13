@@ -6,6 +6,7 @@
   position: sticky;
   top: 0;
   width: 100vw;
+  z-index: 10;
 }
 
 .nav_content .nav_wrapper {
@@ -23,6 +24,11 @@
   margin: auto;
 }
 
+.nav_content .nav_wrapper a {
+  text-decoration: none;
+  color: var(--TEXT);
+}
+
 .nav_content .nav_wrapper .logo {
   font-size: 2.5rem;
 }
@@ -32,6 +38,12 @@
   display: -ms-flexbox;
   display: flex;
   gap: 1.5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
 }
 
