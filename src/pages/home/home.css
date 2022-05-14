@@ -1,6 +1,9 @@
 .homepage_wrapper {
   padding: 1rem 2rem;
   padding-top: 0;
+}
+
+.homepage_wrapper .homepage_posts_wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -56,7 +59,7 @@
 }
 
 @media only screen and (max-width: 850px) {
-  .homepage_wrapper {
+  .homepage_wrapper .homepage_posts_wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -71,8 +74,9 @@
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    margin: auto;
   }
-  .homepage_wrapper .sort_posts {
+  .homepage_wrapper .homepage_posts_wrapper .sort_posts {
     position: static;
     width: 100%;
     max-width: 624px;

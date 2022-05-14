@@ -3,7 +3,10 @@
 .homepage_wrapper {
   padding: 1rem 2rem;
   padding-top: 0;
-  @include flex(1rem, null, flex-start, center);
+
+  .homepage_posts_wrapper {
+    @include flex(1rem, null, flex-start, center);
+  }
 
   .no_posts {
     padding-top: 2rem;
@@ -33,12 +36,15 @@
 
 @media only screen and (max-width: 850px) {
   .homepage_wrapper {
-    @include flex(1rem, column, center, center);
+    .homepage_posts_wrapper {
+      @include flex(1rem, column, center, center);
+      margin: auto;
 
-    .sort_posts {
-      position: static;
-      width: 100%;
-      max-width: 624px;
+      .sort_posts {
+        position: static;
+        width: 100%;
+        max-width: 624px;
+      }
     }
   }
 }

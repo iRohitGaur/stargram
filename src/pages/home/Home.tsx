@@ -46,41 +46,43 @@ export const Home: FC = () => {
 
   return (
     <div className="homepage_wrapper">
-      <div className="sort_posts">
-        <label onClick={() => setSortState(SortBy.recent)}>
-          Recent
-          <input
-            type="radio"
-            name="sortBy"
-            defaultChecked={sortState === SortBy.recent}
-          />
-        </label>
-        <label onClick={() => setSortState(SortBy.trending)}>
-          Trending
-          <input
-            type="radio"
-            name="sortBy"
-            defaultChecked={sortState === SortBy.trending}
-          />
-        </label>
-        <label onClick={() => setSortState(SortBy.olderFirst)}>
-          Older First
-          <input
-            type="radio"
-            name="sortBy"
-            defaultChecked={sortState === SortBy.olderFirst}
-          />
-        </label>
-      </div>
       {allPosts.length === 0 ? (
         <div className="no_posts">
           No posts on your timeline. Follow some people!
         </div>
       ) : (
         <div className="homepage_posts_wrapper">
-          {allPosts.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
+          <div className="sort_posts">
+            <label onClick={() => setSortState(SortBy.recent)}>
+              Recent
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.recent}
+              />
+            </label>
+            <label onClick={() => setSortState(SortBy.trending)}>
+              Trending
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.trending}
+              />
+            </label>
+            <label onClick={() => setSortState(SortBy.olderFirst)}>
+              Older First
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.olderFirst}
+              />
+            </label>
+          </div>
+          <div>
+            {allPosts.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
         </div>
       )}
       {loading && (
