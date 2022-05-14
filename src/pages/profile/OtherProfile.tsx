@@ -1,19 +1,26 @@
 import { Post, User } from "Interfaces";
 import { FC, useEffect, useState } from "react";
 import { Grid as Loader } from "react-loader-spinner";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { timelinePosts } from "reducers/postsSlice";
+import { setUser } from "reducers/userSlice";
+import { RootState } from "store";
 import { useAxios } from "utils";
 import "./profile.css";
 
 export const OtherProfile: FC = () => {
-  const [user, setUser] = useState<User>();
+  const { user } = useSelector((user: RootState) => user.user);
+  const [otherUser, setOtherUser] = useState<User>();
   const [posts, setPosts] = useState<Post[]>([]);
   const { loading, operation } = useAxios();
   const { pathname } = useLocation();
   const path = pathname.substring(1, pathname.length);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
+    if (!otherUser) {
       (async () => {
         const response = await operation({
           method: "get",
@@ -22,37 +29,69 @@ export const OtherProfile: FC = () => {
         const foundUser = response?.user as unknown as User;
         const newPosts = response?.posts as unknown as Post[];
         if (foundUser && newPosts) {
-          setUser(foundUser);
+          setOtherUser(foundUser);
           setPosts(newPosts);
         }
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [otherUser]);
+
+  const toggleFollow = async () => {
+    if (otherUser) {
+      const response = await operation({
+        method: "put",
+        url: `/follow`,
+        data: { followId: otherUser._id },
+      });
+
+      if (response) {
+        setOtherUser(response.otherUser);
+        dispatch(setUser(response.myUser));
+
+        // RG: update timeline posts
+        const timelineResponse = await operation({
+          method: "get",
+          url: "/timeline",
+        });
+        const posts = timelineResponse.posts as unknown as Post[];
+        dispatch(timelinePosts(posts));
+      }
+    }
+  };
 
   return (
     <div className="profile_wrapper">
-      {user ? (
+      {otherUser ? (
         <>
           <div className="about_section">
             <div className="profile_photo">
-              <img src={user.photo} alt={user.username} />
+              <img src={otherUser.photo} alt={otherUser.username} />
             </div>
             <div className="profile_info">
-              <div className="username">{user.username}</div>
+              <div className="username">
+                {otherUser.username}
+                {user && otherUser.followers.includes(user._id ?? "") ? (
+                  <button onClick={toggleFollow}>Unfollow</button>
+                ) : (
+                  <button onClick={toggleFollow}>Follow</button>
+                )}
+              </div>
               <div className="following_followers">
                 <p>
-                  <span>{user.following.length}</span> following
+                  <span>{otherUser.following.length}</span> following
                 </p>
                 <p>
-                  <span>{user.followers.length}</span> followers
+                  <span>{otherUser.followers.length}</span> followers
                 </p>
               </div>
               <div className="name_bio">
-                <div className="profile_name">{user.name}</div>
-                <div className="profile_bio">{user.bio === "" && "no bio"}</div>
+                <div className="profile_name">{otherUser.name}</div>
+                <div className="profile_bio">
+                  {otherUser.bio === "" && "no bio"}
+                </div>
                 <div className="profile_website">
-                  {user.website === "" && "no website"}
+                  {otherUser.website === "" && "no website"}
                 </div>
               </div>
             </div>

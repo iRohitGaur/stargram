@@ -5,6 +5,10 @@
   background: $bg;
   padding: 3rem 0;
 
+  .stg_loader {
+    z-index: 12;
+  }
+
   .post_wrapper {
     @include flex(1rem, column);
     background: $bg-components;
@@ -16,6 +20,9 @@
     width: 100%;
 
     .post_header {
+      @include flex(1rem, null, center, space-between);
+      position: relative;
+
       a {
         @include flex(1rem, null, center);
         height: 32px;
@@ -32,6 +39,35 @@
 
       .post_owner_username {
         font-weight: 600;
+      }
+
+      .post_options_btn {
+        @include flex(1rem, null, center, center);
+        background: none;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .edit_delete_post {
+        background: $bg-components;
+        border: 1px solid $grayOp5;
+        position: absolute;
+        right: -10px;
+        top: 35px;
+        @include flex(0, column);
+
+        button {
+          @include flex(1rem, null, center, center);
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 5px 1.5rem;
+          width: 100%;
+        }
+
+        button:hover {
+          background: $bg;
+        }
       }
     }
 
@@ -80,6 +116,7 @@
     .post_caption {
       font-weight: 400;
       @include flex(1rem);
+      word-break: break-all;
 
       .see_more {
         background: none;
@@ -109,6 +146,10 @@
           height: 24px;
           width: 24px;
           border-radius: 50%;
+        }
+
+        p {
+          word-break: break-all;
         }
       }
     }
@@ -143,6 +184,54 @@
       .disabled_btn {
         color: $gray;
         pointer-events: none;
+      }
+    }
+  }
+
+  .stg_edit_post {
+    @include flex(1rem, column, center, center);
+    backdrop-filter: blur(5px);
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 11;
+
+    .caption {
+      border-radius: 6px;
+      width: 100%;
+      max-width: 624px;
+      outline-color: $primary;
+      padding: 1rem 1.5rem;
+    }
+
+    .cancel_update {
+      @include flex(1rem, null, center, center);
+      width: 100%;
+      max-width: 624px;
+
+      button {
+        background: $primary;
+        border: none;
+        border-radius: 6px;
+        color: $white;
+        cursor: pointer;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        max-width: 624px;
+      }
+
+      button:hover {
+        background: $primarylight1;
+      }
+
+      .cancel_btn {
+        background: $orange;
+      }
+
+      .cancel_btn:hover {
+        background: $yellow;
       }
     }
   }

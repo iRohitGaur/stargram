@@ -1,17 +1,25 @@
 import { PostCard } from "components";
 import { Post } from "Interfaces";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useAxios } from "utils";
 import { RootState } from "store";
 import "./home.css";
 import { timelinePosts, userPosts } from "reducers/postsSlice";
+import { sortByOlderFirst, sortByRecent, sortByTrending } from "./sort";
+
+enum SortBy {
+  recent,
+  trending,
+  olderFirst,
+}
 
 export const Home: FC = () => {
+  const [sortState, setSortState] = useState(SortBy.recent);
   const timeline = useSelector((state: RootState) => state.posts.timelinePosts);
   const myPosts = useSelector((state: RootState) => state.posts.userPosts);
-  const allPosts = sortPosts(timeline, myPosts);
+  const allPosts = sortPosts(sortState, timeline, myPosts);
   const { loading, operation } = useAxios();
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
@@ -43,7 +51,39 @@ export const Home: FC = () => {
           No posts on your timeline. Follow some people!
         </div>
       ) : (
-        allPosts.map((post) => <PostCard key={post._id} post={post} />)
+        <div className="homepage_posts_wrapper">
+          <div className="sort_posts">
+            <label onClick={() => setSortState(SortBy.recent)}>
+              Recent
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.recent}
+              />
+            </label>
+            <label onClick={() => setSortState(SortBy.trending)}>
+              Trending
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.trending}
+              />
+            </label>
+            <label onClick={() => setSortState(SortBy.olderFirst)}>
+              Older First
+              <input
+                type="radio"
+                name="sortBy"
+                defaultChecked={sortState === SortBy.olderFirst}
+              />
+            </label>
+          </div>
+          <div>
+            {allPosts.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
+        </div>
       )}
       {loading && (
         <div className="stg_loader">
@@ -59,8 +99,15 @@ export const Home: FC = () => {
   );
 };
 
-function sortPosts(timeline: Post[], myPosts: Post[]) {
-  const allPosts = [...timeline, ...myPosts];
-
-  return allPosts.sort((a, b) => b.timestamp - a.timestamp);
+function sortPosts(sort: SortBy, timeline: Post[], myPosts: Post[]) {
+  switch (sort) {
+    case SortBy.recent:
+      return sortByRecent(timeline, myPosts);
+    case SortBy.trending:
+      return sortByTrending(timeline, myPosts);
+    case SortBy.olderFirst:
+      return sortByOlderFirst(timeline, myPosts);
+    default:
+      throw new Error(`Non-existent size in switch: ${sort}`);
+  }
 }

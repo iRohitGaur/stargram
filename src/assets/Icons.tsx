@@ -296,3 +296,14 @@ export function IcRoundAdd(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function MiOptionsVertical(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg width="2.5rem" height="2.5rem" viewBox="0 0 24 24" {...props}>
+      <path
+        fill="currentColor"
+        d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0zm0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0zm0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0z"
+      ></path>
+    </svg>
+  );
+}

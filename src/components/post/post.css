@@ -11,6 +11,10 @@
   padding: 3rem 0;
 }
 
+.posts_wrapper .stg_loader {
+  z-index: 12;
+}
+
 .posts_wrapper .post_wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -27,6 +31,20 @@
   margin: auto;
   max-width: 624px;
   width: 100%;
+}
+
+.posts_wrapper .post_wrapper .post_header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
 }
 
 .posts_wrapper .post_wrapper .post_header a {
@@ -54,6 +72,60 @@
 
 .posts_wrapper .post_wrapper .post_header .post_owner_username {
   font-weight: 600;
+}
+
+.posts_wrapper .post_wrapper .post_header .post_options_btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.posts_wrapper .post_wrapper .post_header .edit_delete_post {
+  background: var(--BG-COMPONENTS);
+  border: 1px solid #ababab99;
+  position: absolute;
+  right: -10px;
+  top: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.posts_wrapper .post_wrapper .post_header .edit_delete_post button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px 1.5rem;
+  width: 100%;
+}
+
+.posts_wrapper .post_wrapper .post_header .edit_delete_post button:hover {
+  background: var(--BG);
 }
 
 .posts_wrapper .post_wrapper .post_image {
@@ -124,6 +196,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
+  word-break: break-all;
 }
 
 .posts_wrapper .post_wrapper .post_caption .see_more {
@@ -161,6 +234,10 @@
   height: 24px;
   width: 24px;
   border-radius: 50%;
+}
+
+.posts_wrapper .post_wrapper .post_comments .comment_wrapper p {
+  word-break: break-all;
 }
 
 .posts_wrapper .post_wrapper .post_time {
@@ -203,5 +280,76 @@
 .posts_wrapper .post_wrapper .add_comment_wrapper .disabled_btn {
   color: #ababab;
   pointer-events: none;
+}
+
+.posts_wrapper .stg_edit_post {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 11;
+}
+
+.posts_wrapper .stg_edit_post .caption {
+  border-radius: 6px;
+  width: 100%;
+  max-width: 624px;
+  outline-color: var(--PRIMARY);
+  padding: 1rem 1.5rem;
+}
+
+.posts_wrapper .stg_edit_post .cancel_update {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  max-width: 624px;
+}
+
+.posts_wrapper .stg_edit_post .cancel_update button {
+  background: var(--PRIMARY);
+  border: none;
+  border-radius: 6px;
+  color: var(--WHITE);
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  max-width: 624px;
+}
+
+.posts_wrapper .stg_edit_post .cancel_update button:hover {
+  background: var(--PRIMARY-LIGHT1);
+}
+
+.posts_wrapper .stg_edit_post .cancel_update .cancel_btn {
+  background: #f45b19;
+}
+
+.posts_wrapper .stg_edit_post .cancel_update .cancel_btn:hover {
+  background: #ed9f3a;
 }
 /*# sourceMappingURL=post.css.map */
