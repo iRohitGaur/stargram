@@ -52,7 +52,7 @@ export const Home: FC = () => {
           <input
             type="radio"
             name="sortBy"
-            checked={sortState === SortBy.recent}
+            defaultChecked={sortState === SortBy.recent}
           />
         </label>
         <label onClick={() => setSortState(SortBy.trending)}>
@@ -60,7 +60,7 @@ export const Home: FC = () => {
           <input
             type="radio"
             name="sortBy"
-            checked={sortState === SortBy.trending}
+            defaultChecked={sortState === SortBy.trending}
           />
         </label>
         <label onClick={() => setSortState(SortBy.olderFirst)}>
@@ -68,7 +68,7 @@ export const Home: FC = () => {
           <input
             type="radio"
             name="sortBy"
-            checked={sortState === SortBy.olderFirst}
+            defaultChecked={sortState === SortBy.olderFirst}
           />
         </label>
       </div>
