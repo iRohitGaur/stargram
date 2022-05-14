@@ -116,6 +116,7 @@
     .post_caption {
       font-weight: 400;
       @include flex(1rem);
+      word-break: break-all;
 
       .see_more {
         background: none;
@@ -145,6 +146,10 @@
           height: 24px;
           width: 24px;
           border-radius: 50%;
+        }
+
+        p {
+          word-break: break-all;
         }
       }
     }

@@ -196,6 +196,7 @@
   display: -ms-flexbox;
   display: flex;
   gap: 1rem;
+  word-break: break-all;
 }
 
 .posts_wrapper .post_wrapper .post_caption .see_more {
@@ -233,6 +234,10 @@
   height: 24px;
   width: 24px;
   border-radius: 50%;
+}
+
+.posts_wrapper .post_wrapper .post_comments .comment_wrapper p {
+  word-break: break-all;
 }
 
 .posts_wrapper .post_wrapper .post_time {
