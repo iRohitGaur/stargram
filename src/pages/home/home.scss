@@ -3,9 +3,42 @@
 .homepage_wrapper {
   padding: 1rem 2rem;
   padding-top: 0;
+  @include flex(1rem, null, flex-start, center);
 
   .no_posts {
     padding-top: 2rem;
     text-align: center;
+  }
+
+  .sort_posts {
+    position: sticky;
+    top: 80px;
+    background: $bg-components;
+    border: 1px solid $grayOp5;
+    border-radius: 4px;
+    margin-top: 30px;
+    @include flex(0, column);
+
+    label {
+      @include flex(1rem, null, center, space-between);
+      cursor: pointer;
+      padding: 1rem 2rem;
+    }
+
+    label:hover {
+      background: $bg;
+    }
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .homepage_wrapper {
+    @include flex(1rem, column, center, center);
+
+    .sort_posts {
+      position: static;
+      width: 100%;
+      max-width: 624px;
+    }
   }
 }

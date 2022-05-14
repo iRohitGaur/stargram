@@ -18,9 +18,6 @@ export const OtherProfile: FC = () => {
   const path = pathname.substring(1, pathname.length);
   const dispatch = useDispatch();
 
-  console.log("my user", user);
-  console.log("other user", otherUser);
-
   useEffect(() => {
     if (!otherUser) {
       (async () => {
@@ -46,7 +43,6 @@ export const OtherProfile: FC = () => {
         url: `/follow`,
         data: { followId: otherUser._id },
       });
-      console.log("response", response);
 
       if (response) {
         setOtherUser(response.otherUser);

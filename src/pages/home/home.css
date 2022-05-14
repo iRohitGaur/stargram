@@ -1,10 +1,81 @@
 .homepage_wrapper {
   padding: 1rem 2rem;
   padding-top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .homepage_wrapper .no_posts {
   padding-top: 2rem;
   text-align: center;
+}
+
+.homepage_wrapper .sort_posts {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+  background: var(--BG-COMPONENTS);
+  border: 1px solid #ababab99;
+  border-radius: 4px;
+  margin-top: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.homepage_wrapper .sort_posts label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  cursor: pointer;
+  padding: 1rem 2rem;
+}
+
+.homepage_wrapper .sort_posts label:hover {
+  background: var(--BG);
+}
+
+@media only screen and (max-width: 850px) {
+  .homepage_wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 1rem;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .homepage_wrapper .sort_posts {
+    position: static;
+    width: 100%;
+    max-width: 624px;
+  }
 }
 /*# sourceMappingURL=home.css.map */
