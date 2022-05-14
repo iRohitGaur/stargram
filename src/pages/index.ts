@@ -4,4 +4,5 @@ export { OtherProfile } from "./profile/OtherProfile";
 export { Auth } from "./auth/Auth";
 export { Explore } from "./explore/Explore";
 export { Bookmarks } from "./bookmarks/Bookmarks";
+export { CreatePost } from "./createpost/CreatePost";
 export { Page404 } from "./page404/Page404";

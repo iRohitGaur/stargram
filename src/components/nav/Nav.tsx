@@ -5,9 +5,9 @@ import {
   IcRoundBookmark,
   IcRoundBookmarkBorder,
   RiUser6Line,
-  FluentHome16Regular,
-  FluentHome16Filled,
   IcBaselineLogout,
+  IcRoundAddBox,
+  IcRoundAdd,
 } from "assets/Icons";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./nav.css";
@@ -39,16 +39,14 @@ export const Nav: FC = () => {
   return (
     <div className="nav_content">
       <div className="nav_wrapper">
-        <div className="logo">Stargram</div>
+        <NavLink to={"/"}>
+          <div className="logo">Stargram</div>
+        </NavLink>
         <div className="cta">
           {user && (
             <>
-              <NavLink to={"/"}>
-                {pathname === "/" ? (
-                  <FluentHome16Filled />
-                ) : (
-                  <FluentHome16Regular />
-                )}
+              <NavLink to={"/create"}>
+                {pathname === "/create" ? <IcRoundAddBox /> : <IcRoundAdd />}
               </NavLink>
               <NavLink to={"/explore"}>
                 {pathname === "/explore" ? (
@@ -64,9 +62,6 @@ export const Nav: FC = () => {
                   <IcRoundBookmarkBorder />
                 )}
               </NavLink>
-              {/* <NavLink to={"/profile"}>
-                {pathname === "/profile" ? <RiUser6Fill /> : <RiUser6Line />}
-              </NavLink> */}
               <button className="profile_btn" onClick={handleProfileToggle}>
                 <img src={user.photo} alt={user.username} />
               </button>
