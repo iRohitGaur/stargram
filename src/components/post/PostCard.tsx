@@ -44,7 +44,11 @@ export const PostCard: FC<PostProps> = ({ post }) => {
       data: { postId: post._id, comment: comment.trim() },
     });
     const updatedPost = response as unknown as Post;
-    dispatch(updatePost(updatedPost));
+    if (post.owner._id !== user._id) {
+      dispatch(updatePost(updatedPost));
+    } else {
+      dispatch(updateUserPost(updatedPost));
+    }
     setComment("");
   };
 
