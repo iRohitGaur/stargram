@@ -4,6 +4,7 @@ import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
+import { timelinePosts } from "reducers/postsSlice";
 import { setUser } from "reducers/userSlice";
 import { RootState } from "store";
 import { useAxios } from "utils";
@@ -47,6 +48,14 @@ export const OtherProfile: FC = () => {
       if (response) {
         setOtherUser(response.otherUser);
         dispatch(setUser(response.myUser));
+
+        // RG: update timeline posts
+        const timelineResponse = await operation({
+          method: "get",
+          url: "/timeline",
+        });
+        const posts = timelineResponse.posts as unknown as Post[];
+        dispatch(timelinePosts(posts));
       }
     }
   };
