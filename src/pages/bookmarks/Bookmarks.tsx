@@ -22,6 +22,9 @@ const defaultOptions = {
 export const Bookmarks: FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
+  const { timelinePosts, userPosts } = useSelector(
+    (state: RootState) => state.posts
+  );
   const bookmarks = useSelector(
     (state: RootState) => state.posts.bookmarksPosts
   );
@@ -41,7 +44,7 @@ export const Bookmarks: FC = () => {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, userPosts, timelinePosts]);
 
   return (
     <div>

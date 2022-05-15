@@ -24,9 +24,6 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
   const [editModal, setEditModal] = useState(false);
   const [modalData, setModalData] = useState(singlePost.caption);
   const [captionState, setCaptionState] = useState(false);
-  const [commentState, setCommentState] = useState(
-    singlePost.comments?.length === 1 ? true : false
-  );
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user as User);
@@ -274,33 +271,13 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
   function PostComments() {
     return (
       <div className="post_comments">
-        {commentState ? (
-          singlePost.comments.map((c) => (
-            <div key={c._id} className="comment_wrapper">
-              <img src={c.owner.photo} alt={c.owner.username} />
-              <NavLink to={`/${c.owner.username}`}>{c.owner.username}</NavLink>
-              <p>{c.comment}</p>
-            </div>
-          ))
-        ) : singlePost.comments.length > 0 ? (
-          singlePost.comments.length === 1 ? (
-            <button
-              className="view_all_comments"
-              onClick={() => setCommentState((c) => !c)}
-            >
-              view 1 comment
-            </button>
-          ) : (
-            <button
-              className="view_all_comments"
-              onClick={() => setCommentState((c) => !c)}
-            >
-              view all {singlePost.comments.length} comments
-            </button>
-          )
-        ) : (
-          ""
-        )}
+        {singlePost.comments.map((c) => (
+          <div key={c._id} className="comment_wrapper">
+            <img src={c.owner.photo} alt={c.owner.username} />
+            <NavLink to={`/${c.owner.username}`}>{c.owner.username}</NavLink>
+            <p>{c.comment}</p>
+          </div>
+        ))}
       </div>
     );
   }
