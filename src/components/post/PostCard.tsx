@@ -17,6 +17,10 @@ import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
 import { setUser } from "reducers/userSlice";
 import TextareaAutosize from "react-textarea-autosize";
+import { PostHeader } from "./PostHeader";
+import { PostCta } from "./PostCta";
+import { PostCaption } from "./PostCaption";
+import { PostComments } from "./PostComments";
 
 export const PostCard: FC<PostProps> = ({ post }) => {
   const [editDeleteOptions, setEditDeleteOptions] = useState(false);
@@ -110,22 +114,42 @@ export const PostCard: FC<PostProps> = ({ post }) => {
   return (
     <div className="posts_wrapper">
       <div key={post._id} className="post_wrapper">
-        <PostHeader />
+        <PostHeader
+          user={user}
+          post={post}
+          editDeleteOptions={editDeleteOptions}
+          setEditDeleteOptions={setEditDeleteOptions}
+          OpenEditModal={OpenEditModal}
+          handleDeletePost={handleDeletePost}
+        />
         <Link to={`/post/${post._id}`}>
           <div className="post_image">
             <img src={post.photo} alt={post.caption} className="post_img" />
           </div>
         </Link>
-        <PostCta />
+        <PostCta
+          user={user}
+          post={post}
+          handleLikePost={handleLikePost}
+          handleBookmarkPost={handleBookmarkPost}
+        />
         <div className="likes_comments_wrapper">
           <p className="post_likes">{`${post.likes.length} ${
             post.likes.length === 1 ? "like" : "likes"
           }`}</p>
-          <PostCaption />
+          <PostCaption
+            post={post}
+            captionState={captionState}
+            setCaptionState={setCaptionState}
+          />
           <div className="post_time">
             {new Date(post.timestamp).toLocaleString()}
           </div>
-          <PostComments />
+          <PostComments
+            post={post}
+            commentState={commentState}
+            setCommentState={setCommentState}
+          />
           <div className="add_comment_wrapper">
             <input
               className="add_comment_input"
@@ -180,123 +204,4 @@ export const PostCard: FC<PostProps> = ({ post }) => {
       )}
     </div>
   );
-
-  function PostHeader() {
-    return (
-      <div className="post_header">
-        <NavLink to={`/${post.owner.username}`}>
-          <img
-            className="post_owner_photo"
-            src={post.owner.photo}
-            alt={post.owner.username}
-          />
-          <div className="post_owner_username">{post.owner.username}</div>
-        </NavLink>
-        {post.owner._id === user._id && (
-          <>
-            <button
-              className="post_options_btn"
-              onClick={() => setEditDeleteOptions((o) => !o)}
-            >
-              <MiOptionsVertical />
-            </button>
-            {editDeleteOptions && (
-              <div className="edit_delete_post">
-                <button onClick={OpenEditModal}>Edit</button>
-                <button onClick={handleDeletePost}>Delete</button>
-              </div>
-            )}
-          </>
-        )}
-      </div>
-    );
-  }
-
-  function PostCta() {
-    return (
-      <div className="post_cta">
-        <div className="left_section">
-          <button className="cta_btn like_btn" onClick={handleLikePost}>
-            {post.likes.includes(user._id ?? "") ? (
-              <MdiCardsHeart />
-            ) : (
-              <MdiCardsHeartOutline />
-            )}
-          </button>
-          <button className="cta_btn comment_btn">
-            <TablerMessageCircle2 />
-          </button>
-        </div>
-        <div className="right_section">
-          <button className="cta_btn bookmark_btn" onClick={handleBookmarkPost}>
-            {user.bookmarks.includes(post._id ?? "") ? (
-              <IcRoundBookmark />
-            ) : (
-              <IcRoundBookmarkBorder />
-            )}
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  function PostCaption() {
-    return (
-      <div className="post_caption">
-        <p className="caption_text">
-          {
-            <NavLink to={`/${post.owner.username}`}>
-              {post.owner.username}
-            </NavLink>
-          }{" "}
-          {captionState
-            ? post.caption
-            : post.caption.substring(0, 160 - post.owner.username.length)}
-          {"... "}
-          {
-            <button
-              className="see_more"
-              onClick={() => setCaptionState((c) => !c)}
-            >
-              {captionState ? "see less" : "see more"}
-            </button>
-          }
-        </p>
-      </div>
-    );
-  }
-
-  function PostComments() {
-    return (
-      <div className="post_comments">
-        {commentState ? (
-          post.comments.map((c) => (
-            <div key={c._id} className="comment_wrapper">
-              <img src={c.owner.photo} alt={c.owner.username} />
-              <NavLink to={`/${c.owner.username}`}>{c.owner.username}</NavLink>
-              <p>{c.comment}</p>
-            </div>
-          ))
-        ) : post.comments.length > 0 ? (
-          post.comments.length === 1 ? (
-            <button
-              className="view_all_comments"
-              onClick={() => setCommentState((c) => !c)}
-            >
-              view 1 comment
-            </button>
-          ) : (
-            <button
-              className="view_all_comments"
-              onClick={() => setCommentState((c) => !c)}
-            >
-              view all {post.comments.length} comments
-            </button>
-          )
-        ) : (
-          ""
-        )}
-      </div>
-    );
-  }
 };

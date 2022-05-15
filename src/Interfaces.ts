@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { AxiosResponse } from "axios";
 
 export interface AuthProps {
@@ -8,6 +8,34 @@ export interface AuthProps {
 
 export interface PostProps {
   post: Post;
+}
+
+export interface PostHeaderProps {
+  user: User;
+  post: Post;
+  editDeleteOptions: boolean;
+  setEditDeleteOptions: Dispatch<SetStateAction<boolean>>;
+  OpenEditModal: () => void;
+  handleDeletePost: () => void;
+}
+
+export interface PostCtaProps {
+  user: User;
+  post: Post;
+  handleLikePost: () => void;
+  handleBookmarkPost: () => void;
+}
+
+export interface PostCaptionProps {
+  post: Post;
+  captionState: boolean;
+  setCaptionState: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface PostCommentsProps {
+  post: Post;
+  commentState: boolean;
+  setCommentState: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface Input extends ChangeEvent<HTMLInputElement> {}
