@@ -76,7 +76,10 @@ export const Profile: FC = () => {
       {user && (
         <>
           <div className="about_section">
-            <div className="profile_photo" onClick={handleProfilePic}>
+            <div
+              className="profile_photo my_profile"
+              onClick={handleProfilePic}
+            >
               <input
                 type="file"
                 className="file_input"
@@ -116,7 +119,11 @@ export const Profile: FC = () => {
           </div>
           <div className="user_posts">
             {posts.map((post) => (
-              <div key={post._id} className="post_photo_wrapper">
+              <div
+                key={post._id}
+                className="post_photo_wrapper"
+                onClick={() => navigate(`/post/${post._id}`)}
+              >
                 <img
                   src={post.photo}
                   alt={post.caption}

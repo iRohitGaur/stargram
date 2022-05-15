@@ -1,0 +1,21 @@
+@import "../../styles/variables/variables.scss";
+
+.bookmarks_page_wrapper {
+  padding: 2rem 0;
+}
+
+.no_bookmarks {
+  display: grid;
+  place-items: center;
+
+  p {
+    padding-top: 3rem;
+    font-size: 3rem;
+    font-weight: 500;
+  }
+
+  div {
+    max-height: 400px;
+    max-width: 400px;
+  }
+}

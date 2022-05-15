@@ -6,11 +6,24 @@
 
   .homepage_posts_wrapper {
     @include flex(1rem, null, flex-start, center);
+
+    .timeline_posts_wrapper {
+      padding: 2rem 0;
+    }
   }
 
   .no_posts {
     padding-top: 2rem;
     text-align: center;
+
+    p {
+      font-size: 2rem;
+    }
+
+    div {
+      max-height: 400px;
+      max-width: 400px;
+    }
   }
 
   .sort_posts {

@@ -8,6 +8,18 @@ import { RootState } from "store";
 import "./home.css";
 import { timelinePosts, userPosts } from "reducers/postsSlice";
 import { sortByOlderFirst, sortByRecent, sortByTrending } from "./sort";
+import { Link } from "react-router-dom";
+import Lottie from "react-lottie";
+import animationData from "lotties/no-posts.json";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 enum SortBy {
   recent,
@@ -48,7 +60,12 @@ export const Home: FC = () => {
     <div className="homepage_wrapper">
       {allPosts.length === 0 ? (
         <div className="no_posts">
-          No posts on your timeline. Follow some people!
+          <p>No posts on your timeline.</p>
+          <p>
+            Checkout the <Link to="/explore">explore</Link> page and follow some
+            people!
+          </p>
+          <Lottie options={defaultOptions} />
         </div>
       ) : (
         <div className="homepage_posts_wrapper">
@@ -78,7 +95,7 @@ export const Home: FC = () => {
               />
             </label>
           </div>
-          <div>
+          <div className="timeline_posts_wrapper">
             {allPosts.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}

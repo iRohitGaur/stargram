@@ -3,12 +3,23 @@ import { FC, useEffect, useState } from "react";
 import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { timelinePosts } from "reducers/postsSlice";
 import { setUser } from "reducers/userSlice";
 import { RootState } from "store";
 import { useAxios } from "utils";
 import "./profile.css";
+import Lottie from "react-lottie";
+import animationData from "lotties/search-users.json";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
 
 export const OtherProfile: FC = () => {
   const { user } = useSelector((user: RootState) => user.user);
@@ -18,6 +29,7 @@ export const OtherProfile: FC = () => {
   const { pathname } = useLocation();
   const path = pathname.substring(1, pathname.length);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!otherUser) {
@@ -88,17 +100,25 @@ export const OtherProfile: FC = () => {
               <div className="name_bio">
                 <div className="profile_name">{otherUser.name}</div>
                 <div className="profile_bio">
-                  {otherUser.bio === "" && "no bio"}
+                  {otherUser.bio === "" ? "no bio" : otherUser.bio}
                 </div>
                 <div className="profile_website">
-                  {otherUser.website === "" && "no website"}
+                  {otherUser.website === "" ? (
+                    "no website"
+                  ) : (
+                    <a href={otherUser.website}>{otherUser.website}</a>
+                  )}
                 </div>
               </div>
             </div>
           </div>
           <div className="user_posts">
             {posts.map((post) => (
-              <div key={post._id} className="post_photo_wrapper">
+              <div
+                key={post._id}
+                className="post_photo_wrapper"
+                onClick={() => navigate(`/post/${post._id}`)}
+              >
                 <img
                   src={post.photo}
                   alt={post.caption}
@@ -119,7 +139,9 @@ export const OtherProfile: FC = () => {
           )}
         </>
       ) : (
-        <div className="user_not_found">user not found</div>
+        <div className="user_not_found">
+          <Lottie options={defaultOptions} />
+        </div>
       )}
     </div>
   );

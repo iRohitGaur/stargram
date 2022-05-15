@@ -16,9 +16,22 @@
           justify-content: center;
 }
 
+.homepage_wrapper .homepage_posts_wrapper .timeline_posts_wrapper {
+  padding: 2rem 0;
+}
+
 .homepage_wrapper .no_posts {
   padding-top: 2rem;
   text-align: center;
+}
+
+.homepage_wrapper .no_posts p {
+  font-size: 2rem;
+}
+
+.homepage_wrapper .no_posts div {
+  max-height: 400px;
+  max-width: 400px;
 }
 
 .homepage_wrapper .sort_posts {

@@ -1,33 +1,31 @@
 import { Input, Post, PostProps, User } from "Interfaces";
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
-import "./post.css";
+import { NavLink, useNavigate } from "react-router-dom";
+import "components/post/post.css";
 import { useAxios, useToast } from "utils";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, updatePost, updateUserPost } from "reducers/postsSlice";
+import { updateUserPost } from "reducers/postsSlice";
 import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
 import { setUser } from "reducers/userSlice";
 import TextareaAutosize from "react-textarea-autosize";
-import { PostHeader } from "./PostHeader";
-import { PostCta } from "./PostCta";
-import { PostCaption } from "./PostCaption";
-import { PostComments } from "./PostComments";
+import { PostHeader } from "components/post/PostHeader";
+import { PostCta } from "components/post/PostCta";
+import { PostCaption } from "components/post/PostCaption";
 
-export const PostCard: FC<PostProps> = ({ post }) => {
+export const IndividualPostCard: FC<PostProps> = ({ post }) => {
+  const [singlePost, setSinglePost] = useState<Post>(post);
   const [editDeleteOptions, setEditDeleteOptions] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [modalData, setModalData] = useState(post.caption);
+  const [modalData, setModalData] = useState(singlePost.caption);
   const [captionState, setCaptionState] = useState(false);
-  const [commentState, setCommentState] = useState(
-    post.comments?.length === 1 ? true : false
-  );
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user as User);
 
   const { loading, operation } = useAxios();
   const { sendToast } = useToast();
+  const navigate = useNavigate();
 
   const handleCommentInput = (e: Input) => {
     setComment(e.target.value);
@@ -37,28 +35,24 @@ export const PostCard: FC<PostProps> = ({ post }) => {
     const response = await operation({
       method: "put",
       url: "/comment",
-      data: { postId: post._id, comment: comment.trim() },
+      data: { postId: singlePost._id, comment: comment.trim() },
     });
     const updatedPost = response as unknown as Post;
-    if (post.owner._id !== user._id) {
-      dispatch(updatePost(updatedPost));
-    } else {
-      dispatch(updateUserPost(updatedPost));
+    if (updatedPost) {
+      setSinglePost(updatedPost);
+      setComment("");
     }
-    setComment("");
   };
 
   const handleLikePost = async () => {
     const response = await operation({
       method: "put",
       url: "/like",
-      data: { postId: post._id },
+      data: { postId: singlePost._id },
     });
     const updatedPost = response as unknown as Post;
-    if (post.owner._id !== user._id) {
-      dispatch(updatePost(updatedPost));
-    } else {
-      dispatch(updateUserPost(updatedPost));
+    if (updatedPost) {
+      setSinglePost(updatedPost);
     }
   };
 
@@ -66,9 +60,8 @@ export const PostCard: FC<PostProps> = ({ post }) => {
     const response = await operation({
       method: "put",
       url: "/bookmark",
-      data: { postId: post._id },
+      data: { postId: singlePost._id },
     });
-
     const updatedUser = response as unknown as User;
     dispatch(setUser(updatedUser));
   };
@@ -82,13 +75,13 @@ export const PostCard: FC<PostProps> = ({ post }) => {
   };
 
   const handleDeletePost = async () => {
-    if (post._id) {
+    if (singlePost._id) {
       const response = await operation({
         method: "delete",
-        url: `/delete/${post._id}`,
+        url: `/delete/${singlePost._id}`,
       });
-      dispatch(deletePost(post._id));
       sendToast(response.message);
+      navigate(`/${user.username}`);
     }
   };
 
@@ -96,16 +89,19 @@ export const PostCard: FC<PostProps> = ({ post }) => {
     const response = await operation({
       method: "put",
       url: `/post/edit`,
-      data: { postId: post._id, caption: modalData },
+      data: { postId: singlePost._id, caption: modalData },
     });
     const updatedPost = response as unknown as Post;
+    if (updatedPost) {
+      setSinglePost(updatedPost);
+    }
     dispatch(updateUserPost(updatedPost));
     setEditModal(false);
   };
 
   return (
     <div className="posts_wrapper">
-      <div key={post._id} className="post_wrapper">
+      <div key={singlePost._id} className="post_wrapper">
         <PostHeader
           user={user}
           post={post}
@@ -114,11 +110,13 @@ export const PostCard: FC<PostProps> = ({ post }) => {
           OpenEditModal={OpenEditModal}
           handleDeletePost={handleDeletePost}
         />
-        <Link to={`/post/${post._id}`}>
-          <div className="post_image">
-            <img src={post.photo} alt={post.caption} className="post_img" />
-          </div>
-        </Link>
+        <div className="post_image">
+          <img
+            src={singlePost.photo}
+            alt={singlePost.caption}
+            className="post_img"
+          />
+        </div>
         <PostCta
           user={user}
           post={post}
@@ -126,8 +124,8 @@ export const PostCard: FC<PostProps> = ({ post }) => {
           handleBookmarkPost={handleBookmarkPost}
         />
         <div className="likes_comments_wrapper">
-          <p className="post_likes">{`${post.likes.length} ${
-            post.likes.length === 1 ? "like" : "likes"
+          <p className="post_likes">{`${singlePost.likes.length} ${
+            singlePost.likes.length === 1 ? "like" : "likes"
           }`}</p>
           <PostCaption
             post={post}
@@ -135,13 +133,19 @@ export const PostCard: FC<PostProps> = ({ post }) => {
             setCaptionState={setCaptionState}
           />
           <div className="post_time">
-            {new Date(post.timestamp).toLocaleString()}
+            {new Date(singlePost.timestamp).toLocaleString()}
           </div>
-          <PostComments
-            post={post}
-            commentState={commentState}
-            setCommentState={setCommentState}
-          />
+          <div className="post_comments">
+            {singlePost.comments.map((c) => (
+              <div key={c._id} className="comment_wrapper">
+                <img src={c.owner.photo} alt={c.owner.username} />
+                <NavLink to={`/${c.owner.username}`}>
+                  {c.owner.username}
+                </NavLink>
+                <p>{c.comment}</p>
+              </div>
+            ))}
+          </div>
           <div className="add_comment_wrapper">
             <input
               className="add_comment_input"

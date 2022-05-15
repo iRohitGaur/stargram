@@ -1,14 +1,11 @@
-import { FC, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "store";
+import { FC, useEffect, useState } from "react";
 import { useAxios } from "utils";
+import { Post } from "Interfaces";
+import { useParams } from "react-router-dom";
 import { Grid as Loader } from "react-loader-spinner";
-import { updateExplorePosts } from "reducers/postsSlice";
-import { PostCard } from "components";
-import "./explore.css";
 import Lottie from "react-lottie";
 import animationData from "lotties/search-users.json";
+import { IndividualPostCard } from "./IndividualPostCard";
 
 const defaultOptions = {
   loop: true,
@@ -18,21 +15,20 @@ const defaultOptions = {
     preserveAspectRatio: "xMidYMid slice",
   },
 };
-
-export const Explore: FC = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const explore = useSelector((state: RootState) => state.posts.explorePosts);
+export const IndividualPost: FC = () => {
+  const [post, setPost] = useState<Post | undefined>();
   const { loading, operation } = useAxios();
+  const { postId } = useParams();
 
   useEffect(() => {
     (async () => {
       try {
-        const allPostsResponse = await operation({
+        const response = await operation({
           method: "get",
-          url: "/allposts",
+          url: `/post/${postId}`,
         });
-        const posts = allPostsResponse.posts;
-        dispatch(updateExplorePosts(posts));
+        const IndividualPost = response.post;
+        setPost(IndividualPost);
       } catch (error) {
         console.log(error);
       }
@@ -41,15 +37,14 @@ export const Explore: FC = () => {
   }, []);
 
   return (
-    <div className="explore_page_wrapper">
-      {explore.length === 0 && (
+    <div className="individual_post_page_wrapper">
+      {post ? (
+        <IndividualPostCard key={post._id} post={post} />
+      ) : (
         <div className="no_users">
           <Lottie options={defaultOptions} />
         </div>
       )}
-      {explore.map((post) => (
-        <PostCard key={post._id} post={post} />
-      ))}
       {loading && (
         <div className="stg_loader">
           <Loader

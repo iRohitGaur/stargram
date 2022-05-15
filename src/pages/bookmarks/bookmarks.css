@@ -1,0 +1,21 @@
+.bookmarks_page_wrapper {
+  padding: 2rem 0;
+}
+
+.no_bookmarks {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.no_bookmarks p {
+  padding-top: 3rem;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.no_bookmarks div {
+  max-height: 400px;
+  max-width: 400px;
+}
+/*# sourceMappingURL=bookmarks.css.map */
