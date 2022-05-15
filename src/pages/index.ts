@@ -6,3 +6,4 @@ export { Explore } from "./explore/Explore";
 export { Bookmarks } from "./bookmarks/Bookmarks";
 export { CreatePost } from "./createpost/CreatePost";
 export { Page404 } from "./page404/Page404";
+export { IndividualPost } from "./individualpost/IndividualPost";

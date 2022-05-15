@@ -1,0 +1,17 @@
+@import "../../styles/variables/variables.scss";
+
+.no_bookmarks {
+  display: grid;
+  place-items: center;
+
+  p {
+    padding-top: 3rem;
+    font-size: 3rem;
+    font-weight: 500;
+  }
+
+  div {
+    max-height: 400px;
+    max-width: 400px;
+  }
+}

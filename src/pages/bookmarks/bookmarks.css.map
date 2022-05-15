@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,aAAa,CAAC;EACZ,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;CAYpB;;AAdD,AAIE,aAJW,CAIX,CAAC,CAAC;EACA,WAAW,EAAE,IAAI;EACjB,SAAS,EAAE,IAAI;EACf,WAAW,EAAE,GAAG;CACjB;;AARH,AAUE,aAVW,CAUX,GAAG,CAAC;EACF,UAAU,EAAE,KAAK;EACjB,SAAS,EAAE,KAAK;CACjB",
+    "sources": [
+        "bookmarks.scss",
+        "../../styles/variables/variables.scss"
+    ],
+    "names": [],
+    "file": "bookmarks.css"
+}

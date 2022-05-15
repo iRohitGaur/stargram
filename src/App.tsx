@@ -8,6 +8,7 @@ import {
   CreatePost,
   Explore,
   Home,
+  IndividualPost,
   OtherProfile,
   Page404,
   Profile,
@@ -53,6 +54,7 @@ const App: FC = () => {
           <Route path="/explore" element={<Explore />} />
           <Route path="/bookmarks" element={<Bookmarks />} />
           <Route path="/create" element={<CreatePost />} />
+          <Route path="/post/:postId" element={<IndividualPost />} />
           <Route path={`/${user?.username}`} element={<Profile />} />
           <Route path={`/${user?.username}/edit`} element={<EditProfile />} />
         </Route>

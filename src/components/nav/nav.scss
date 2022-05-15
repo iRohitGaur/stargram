@@ -36,6 +36,7 @@
       }
 
       .profile_btn {
+        aspect-ratio: 1/1;
         background: none;
         border: none;
         border-radius: 50%;
@@ -44,6 +45,13 @@
         max-width: 2.5rem;
         overflow: hidden;
         padding: 0;
+
+        img {
+          height: 100%;
+          width: 100%;
+          aspect-ratio: 1/1;
+          object-fit: cover;
+        }
       }
 
       .profile_dropdown {

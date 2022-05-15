@@ -1,0 +1,17 @@
+.no_users {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.no_users p {
+  padding-top: 3rem;
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.no_users div {
+  max-height: 400px;
+  max-width: 400px;
+}
+/*# sourceMappingURL=explore.css.map */

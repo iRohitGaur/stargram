@@ -21,6 +21,15 @@
   text-align: center;
 }
 
+.homepage_wrapper .no_posts p {
+  font-size: 2rem;
+}
+
+.homepage_wrapper .no_posts div {
+  max-height: 400px;
+  max-width: 400px;
+}
+
 .homepage_wrapper .sort_posts {
   position: -webkit-sticky;
   position: sticky;
