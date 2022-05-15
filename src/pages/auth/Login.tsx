@@ -15,7 +15,10 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   const dispatch = useDispatch();
 
   const handleUsernameOrEmail = (e: Input) => {
-    setLoginForm((s) => ({ ...s, usernameOrEmail: e.target.value }));
+    setLoginForm((s) => ({
+      ...s,
+      usernameOrEmail: e.target.value.toLowerCase(),
+    }));
   };
 
   const handlePassword = (e: Input) => {

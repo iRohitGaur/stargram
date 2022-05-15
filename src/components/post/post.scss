@@ -1,9 +1,13 @@
 @import "../../styles/variables/variables.scss";
 
+.individual_post_page_wrapper {
+  padding: 2rem 0;
+}
+
 .posts_wrapper {
   @include flex(3rem, column);
   background: $bg;
-  padding: 3rem 0;
+  padding: 1rem 0;
 
   .stg_loader {
     z-index: 12;

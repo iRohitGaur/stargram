@@ -16,6 +16,10 @@
           justify-content: center;
 }
 
+.homepage_wrapper .homepage_posts_wrapper .timeline_posts_wrapper {
+  padding: 2rem 0;
+}
+
 .homepage_wrapper .no_posts {
   padding-top: 2rem;
   text-align: center;

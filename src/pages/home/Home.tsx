@@ -95,7 +95,7 @@ export const Home: FC = () => {
               />
             </label>
           </div>
-          <div>
+          <div className="timeline_posts_wrapper">
             {allPosts.map((post) => (
               <PostCard key={post._id} post={post} />
             ))}

@@ -21,11 +21,11 @@ const Signup: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   };
 
   const handleUsername = (e: Input) => {
-    setSignupForm((s) => ({ ...s, username: e.target.value }));
+    setSignupForm((s) => ({ ...s, username: e.target.value.toLowerCase() }));
   };
 
   const handleEmail = (e: Input) => {
-    setSignupForm((s) => ({ ...s, email: e.target.value }));
+    setSignupForm((s) => ({ ...s, email: e.target.value.toLowerCase() }));
   };
 
   const handlePassword = (e: Input) => {

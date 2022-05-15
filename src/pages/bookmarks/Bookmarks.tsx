@@ -47,7 +47,7 @@ export const Bookmarks: FC = () => {
   }, [user, userPosts, timelinePosts]);
 
   return (
-    <div>
+    <div className="bookmarks_page_wrapper">
       {bookmarks.length === 0 && (
         <div className="no_bookmarks">
           <p>No bookmarks</p>

@@ -6,6 +6,10 @@
 
   .homepage_posts_wrapper {
     @include flex(1rem, null, flex-start, center);
+
+    .timeline_posts_wrapper {
+      padding: 2rem 0;
+    }
   }
 
   .no_posts {

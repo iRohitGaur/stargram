@@ -1,3 +1,7 @@
+.bookmarks_page_wrapper {
+  padding: 2rem 0;
+}
+
 .no_bookmarks {
   display: -ms-grid;
   display: grid;

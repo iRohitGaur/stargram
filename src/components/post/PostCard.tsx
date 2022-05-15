@@ -1,14 +1,6 @@
-import {
-  IcRoundBookmark,
-  IcRoundBookmarkBorder,
-  MdiCardsHeart,
-  MdiCardsHeartOutline,
-  MiOptionsVertical,
-  TablerMessageCircle2,
-} from "assets/Icons";
 import { Input, Post, PostProps, User } from "Interfaces";
 import { FC, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./post.css";
 import { useAxios, useToast } from "utils";
 import { useDispatch, useSelector } from "react-redux";

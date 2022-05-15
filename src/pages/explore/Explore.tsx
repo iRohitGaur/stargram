@@ -41,7 +41,7 @@ export const Explore: FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="explore_page_wrapper">
       {explore.length === 0 && (
         <div className="no_users">
           <Lottie options={defaultOptions} />

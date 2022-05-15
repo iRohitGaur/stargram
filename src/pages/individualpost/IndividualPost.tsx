@@ -37,7 +37,7 @@ export const IndividualPost: FC = () => {
   }, []);
 
   return (
-    <div>
+    <div className="individual_post_page_wrapper">
       {post ? (
         <IndividualPostCard key={post._id} post={post} />
       ) : (
