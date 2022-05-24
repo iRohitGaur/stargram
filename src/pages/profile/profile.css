@@ -221,6 +221,7 @@ body {
   -ms-grid-columns: (1fr)[3];
       grid-template-columns: repeat(3, 1fr);
   padding: 2rem 0;
+  place-items: center;
 }
 
 .profile_wrapper .user_posts .post_photo_wrapper {
