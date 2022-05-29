@@ -1,12 +1,12 @@
 import { PostCard } from "components";
 import { Post } from "Interfaces";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useAxios } from "utils";
 import { RootState } from "store";
 import "./home.css";
-import { timelinePosts, userPosts } from "reducers/postsSlice";
+import { timelinePosts } from "reducers/postsSlice";
 import { sortByOlderFirst, sortByRecent, sortByTrending } from "./sort";
 import { Link } from "react-router-dom";
 import Lottie from "react-lottie";
@@ -29,32 +29,52 @@ enum SortBy {
 
 export const Home: FC = () => {
   const [sortState, setSortState] = useState(SortBy.recent);
+  const [page, setPage] = useState(1);
   const timeline = useSelector((state: RootState) => state.posts.timelinePosts);
-  const myPosts = useSelector((state: RootState) => state.posts.userPosts);
-  const allPosts = sortPosts(sortState, timeline, myPosts);
+  const allPosts = sortPosts(sortState, timeline);
   const { loading, operation } = useAxios();
   const dispatch = useDispatch();
   const { user } = useSelector((state: RootState) => state.user);
+  const loadPosts = useRef(null);
 
   useEffect(() => {
-    if (user && allPosts.length === 0) {
+    const element = loadPosts.current;
+
+    const handleObserver = (entries: IntersectionObserverEntry[]) => {
+      const target = entries[0];
+      if (target.isIntersecting) {
+        setPage((page) => page + 1);
+      }
+    };
+    const observer = new IntersectionObserver(handleObserver);
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (user) {
       (async () => {
         const timelineResponse = await operation({
           method: "get",
-          url: "/timeline",
+          url: `/timeline/${page}/${sortState}`,
         });
         const posts = timelineResponse.posts as unknown as Post[];
-        const userPostsresponse = await operation({
-          method: "get",
-          url: "/posts",
-        });
-        const newPosts = userPostsresponse.posts as unknown as Post[];
-        dispatch(userPosts(newPosts));
         dispatch(timelinePosts(posts));
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
+  }, [user, page, sortState]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [sortState]);
 
   return (
     <div className="homepage_wrapper">
@@ -102,6 +122,7 @@ export const Home: FC = () => {
           </div>
         </div>
       )}
+      <div ref={loadPosts}></div>
       {loading && (
         <div className="stg_loader">
           <Loader
@@ -116,14 +137,14 @@ export const Home: FC = () => {
   );
 };
 
-function sortPosts(sort: SortBy, timeline: Post[], myPosts: Post[]) {
+function sortPosts(sort: SortBy, timeline: Post[]) {
   switch (sort) {
     case SortBy.recent:
-      return sortByRecent(timeline, myPosts);
+      return sortByRecent(timeline);
     case SortBy.trending:
-      return sortByTrending(timeline, myPosts);
+      return sortByTrending(timeline);
     case SortBy.olderFirst:
-      return sortByOlderFirst(timeline, myPosts);
+      return sortByOlderFirst(timeline);
     default:
       throw new Error(`Non-existent size in switch: ${sort}`);
   }
