@@ -24,7 +24,7 @@ const postsSlice = createSlice({
       state.userPosts = action.payload;
     },
     addNewPost(state, action: PayloadAction<Post>) {
-      state.userPosts.push(action.payload);
+      state.userPosts.unshift(action.payload);
     },
     timelinePosts(state, action: PayloadAction<Post[]>) {
       state.timelinePosts = action.payload;

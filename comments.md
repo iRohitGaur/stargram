@@ -1,0 +1,5 @@
+- added infinite scroll
+  - updated:
+    - Home.tsx
+    - sort.ts
+    - postsSlice.ts

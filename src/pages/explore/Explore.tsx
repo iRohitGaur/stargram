@@ -29,7 +29,7 @@ export const Explore: FC = () => {
       try {
         const allPostsResponse = await operation({
           method: "get",
-          url: "/allposts",
+          url: "/explore",
         });
         const posts = allPostsResponse.posts;
         dispatch(updateExplorePosts(posts));
