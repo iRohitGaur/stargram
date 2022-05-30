@@ -1,17 +1,17 @@
 import { Input, Post, PostProps, User } from "Interfaces";
 import { FC, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "components/post/post.css";
 import { useAxios, useToast } from "utils";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserPost } from "reducers/postsSlice";
 import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
-import { setUser } from "reducers/userSlice";
 import TextareaAutosize from "react-textarea-autosize";
 import { PostHeader } from "components/post/PostHeader";
 import { PostCta } from "components/post/PostCta";
 import { PostCaption } from "components/post/PostCaption";
+import { PostComments } from "components/post/PostComments";
 
 export const IndividualPostCard: FC<PostProps> = ({ post }) => {
   const [singlePost, setSinglePost] = useState<Post>(post);
@@ -20,6 +20,7 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
   const [modalData, setModalData] = useState(singlePost.caption);
   const [captionState, setCaptionState] = useState(false);
   const [comment, setComment] = useState("");
+  const [commentState, setCommentState] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user as User);
 
@@ -42,28 +43,6 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
       setSinglePost(updatedPost);
       setComment("");
     }
-  };
-
-  const handleLikePost = async () => {
-    const response = await operation({
-      method: "put",
-      url: "/like",
-      data: { postId: singlePost._id },
-    });
-    const updatedPost = response as unknown as Post;
-    if (updatedPost) {
-      setSinglePost(updatedPost);
-    }
-  };
-
-  const handleBookmarkPost = async () => {
-    const response = await operation({
-      method: "put",
-      url: "/bookmark",
-      data: { postId: singlePost._id },
-    });
-    const updatedUser = response as unknown as User;
-    dispatch(setUser(updatedUser));
   };
 
   const OpenEditModal = () => {
@@ -117,12 +96,7 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
             className="post_img"
           />
         </div>
-        <PostCta
-          user={user}
-          post={post}
-          handleLikePost={handleLikePost}
-          handleBookmarkPost={handleBookmarkPost}
-        />
+        <PostCta user={user} post={post} />
         <div className="likes_comments_wrapper">
           <p className="post_likes">{`${singlePost.likes.length} ${
             singlePost.likes.length === 1 ? "like" : "likes"
@@ -135,17 +109,12 @@ export const IndividualPostCard: FC<PostProps> = ({ post }) => {
           <div className="post_time">
             {new Date(singlePost.timestamp).toLocaleString()}
           </div>
-          <div className="post_comments">
-            {singlePost.comments.map((c) => (
-              <div key={c._id} className="comment_wrapper">
-                <img src={c.owner.photo} alt={c.owner.username} />
-                <NavLink to={`/${c.owner.username}`}>
-                  {c.owner.username}
-                </NavLink>
-                <p>{c.comment}</p>
-              </div>
-            ))}
-          </div>
+          <PostComments
+            user={user}
+            post={post}
+            commentState={commentState}
+            setCommentState={setCommentState}
+          />
           <div className="add_comment_wrapper">
             <input
               className="add_comment_input"

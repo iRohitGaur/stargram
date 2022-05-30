@@ -71,6 +71,7 @@
 
         p {
           font-size: 1.5rem;
+          cursor: pointer;
 
           span {
             font-weight: 500;
@@ -143,5 +144,58 @@
 
   .update_profile_btn:hover {
     background: $primarylight1;
+  }
+}
+
+.user_follow_list_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(5px);
+  display: grid;
+  place-items: center;
+
+  .user_follow_list_content {
+    @include flex(0, column);
+    background: $bg;
+    border-radius: 8px;
+    box-shadow: 0 0 5px $gray;
+    padding: 2rem 0;
+
+    .user_follow_list_title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 500;
+      padding-bottom: 1rem;
+    }
+
+    .user_follow_list {
+      @include flex(5rem, null, center, space-between);
+      max-width: 300px;
+      padding: 5px 2rem;
+
+      .img_username {
+        @include flex(5px, null, center);
+        cursor: pointer;
+
+        img {
+          height: 40px;
+          width: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+      }
+
+      button {
+        font-size: 1.4rem;
+        cursor: pointer;
+        width: 80px;
+      }
+    }
+    .user_follow_list:hover {
+      background: $grayOp5;
+    }
   }
 }

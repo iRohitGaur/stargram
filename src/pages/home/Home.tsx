@@ -37,7 +37,20 @@ export const Home: FC = () => {
   const { user } = useSelector((state: RootState) => state.user);
   const loadPosts = useRef(null);
 
+  const getTimelinePosts = async () => {
+    if (user) {
+      const timelineResponse = await operation({
+        method: "get",
+        url: `/timeline/${page}/${sortState}`,
+      });
+      const posts = timelineResponse.posts as unknown as Post[];
+      dispatch(timelinePosts(posts));
+    }
+  };
+
   useEffect(() => {
+    getTimelinePosts();
+    
     const element = loadPosts.current;
 
     const handleObserver = (entries: IntersectionObserverEntry[]) => {
@@ -56,21 +69,13 @@ export const Home: FC = () => {
         observer.unobserve(element);
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (user) {
-      (async () => {
-        const timelineResponse = await operation({
-          method: "get",
-          url: `/timeline/${page}/${sortState}`,
-        });
-        const posts = timelineResponse.posts as unknown as Post[];
-        dispatch(timelinePosts(posts));
-      })();
-    }
+    getTimelinePosts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, page, sortState]);
+  }, [page, sortState]);
 
   useEffect(() => {
     window.scrollTo(0, 0);

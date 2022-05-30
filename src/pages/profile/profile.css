@@ -103,6 +103,33 @@ body {
           backdrop-filter: blur(2px);
 }
 
+.spinning_loader {
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
 .profile_wrapper {
   height: 100%;
   margin: auto;
@@ -203,6 +230,7 @@ body {
 
 .profile_wrapper .about_section .profile_info .following_followers p {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .profile_wrapper .about_section .profile_info .following_followers p span {
@@ -298,5 +326,85 @@ body {
 
 .edit_profile_wrapper .update_profile_btn:hover {
   background: var(--PRIMARY-LIGHT1);
+}
+
+.user_follow_list_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.user_follow_list_wrapper .user_follow_list_content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 0;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background: var(--BG);
+  border-radius: 8px;
+  -webkit-box-shadow: 0 0 5px #ababab;
+          box-shadow: 0 0 5px #ababab;
+  padding: 2rem 0;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list_title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 300px;
+  padding: 5px 2rem;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list .img_username {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list .img_username img {
+  height: 40px;
+  width: 40px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list button {
+  font-size: 1.4rem;
+  cursor: pointer;
+  width: 80px;
+}
+
+.user_follow_list_wrapper .user_follow_list_content .user_follow_list:hover {
+  background: #ababab99;
 }
 /*# sourceMappingURL=profile.css.map */

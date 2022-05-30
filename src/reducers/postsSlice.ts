@@ -49,9 +49,15 @@ const postsSlice = createSlice({
       state.userPosts = state.userPosts.map((p) =>
         p._id === action.payload._id ? action.payload : p
       );
+      state.timelinePosts = state.timelinePosts.map((p) =>
+        p._id === action.payload._id ? action.payload : p
+      );
     },
     deletePost(state, action: PayloadAction<string>) {
       state.userPosts = state.userPosts.filter((p) => p._id !== action.payload);
+      state.timelinePosts = state.timelinePosts.filter(
+        (p) => p._id !== action.payload
+      );
     },
     updateBookmarks(state, action: PayloadAction<Post[]>) {
       state.bookmarksPosts = action.payload;

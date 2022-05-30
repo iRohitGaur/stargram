@@ -1,8 +1,10 @@
 import { PostCommentsProps } from "Interfaces";
 import { FC } from "react";
 import { Link } from "react-router-dom";
+import { DeleteButton } from "./DeleteButton";
 
 export const PostComments: FC<PostCommentsProps> = ({
+  user,
   post,
   commentState,
   setCommentState,
@@ -12,9 +14,15 @@ export const PostComments: FC<PostCommentsProps> = ({
       {commentState ? (
         post.comments.map((c) => (
           <div key={c._id} className="comment_wrapper">
-            <img src={c.owner.photo} alt={c.owner.username} />
-            <Link to={`/${c.owner.username}`}>{c.owner.username}</Link>
-            <p>{c.comment}</p>
+            <div className="comment_section">
+              <img src={c.owner.photo} alt={c.owner.username} />
+              <Link to={`/${c.owner.username}`}>{c.owner.username}</Link>
+              <p>{c.comment}</p>
+            </div>
+            {/* post owner can delete all comments, comment owner can delete own comment */}
+            {(user._id === post.owner._id || user._id === c.owner._id) && (
+              <DeleteButton user={user} post={post} commentId={c._id ?? ""} />
+            )}
           </div>
         ))
       ) : post.comments.length > 0 ? (

@@ -3,3 +3,27 @@
     - Home.tsx
     - sort.ts
     - postsSlice.ts
+- option to delete comment
+  - updated:
+    - Home.tsx
+    - postsSlice.ts
+    - Interfaces.ts
+    - PostCta.tsx
+    - PostCard.tsx
+    - PostCaption.tsx
+    - PostComments.tsx
+    - IndividualPostCard.tsx
+  - added:
+    - DeleteButton.tsx
+- dismiss options on outside click
+  - updated:
+    - Nav.tsx
+    - PostHeader.tsx
+  - added:
+    - useOnClickOutside.ts
+- update profile & see followers
+  - updated:
+    - Profile.tsx
+    - OtherProfile.tsx
+  - added:
+    - ToggleFollow.tsx

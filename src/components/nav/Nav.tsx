@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import {
   HeroiconsOutlineLightningBolt,
   HeroiconsSolidLightningBolt,
@@ -14,6 +14,7 @@ import "./nav.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import { logout } from "reducers/userSlice";
+import { useOnClickOutside } from "utils";
 
 export const Nav: FC = () => {
   const [toggleProfile, setToggleProfile] = useState(false);
@@ -21,6 +22,8 @@ export const Nav: FC = () => {
   const { user } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const profileRef = useRef(null);
+  useOnClickOutside(profileRef, () => setToggleProfile(false));
 
   const handleProfileToggle = () => {
     setToggleProfile((p) => !p);
@@ -42,7 +45,7 @@ export const Nav: FC = () => {
         <NavLink to={"/"}>
           <div className="logo">Stargram</div>
         </NavLink>
-        <div className="cta">
+        <div className="cta" ref={profileRef}>
           {user && (
             <>
               <NavLink to={"/create"}>

@@ -11,18 +11,24 @@ export const PostCaption: FC<PostCaptionProps> = ({
     <div className="post_caption">
       <p className="caption_text">
         {<Link to={`/${post.owner.username}`}>{post.owner.username}</Link>}{" "}
-        {captionState
-          ? post.caption
-          : post.caption.substring(0, 160 - post.owner.username.length)}
-        {"... "}
-        {
-          <button
-            className="see_more"
-            onClick={() => setCaptionState((c) => !c)}
-          >
-            {captionState ? "see less" : "see more"}
-          </button>
-        }
+        {post.caption.length < 150 ? (
+          post.caption
+        ) : (
+          <>
+            {captionState
+              ? post.caption
+              : post.caption.substring(0, 160 - post.owner.username.length)}
+            {"... "}
+            {
+              <button
+                className="see_more"
+                onClick={() => setCaptionState((c) => !c)}
+              >
+                {captionState ? "see less" : "see more"}
+              </button>
+            }
+          </>
+        )}
       </p>
     </div>
   );

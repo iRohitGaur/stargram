@@ -22,8 +22,6 @@ export interface PostHeaderProps {
 export interface PostCtaProps {
   user: User;
   post: Post;
-  handleLikePost: () => void;
-  handleBookmarkPost: () => void;
 }
 
 export interface PostCaptionProps {
@@ -33,6 +31,7 @@ export interface PostCaptionProps {
 }
 
 export interface PostCommentsProps {
+  user: User;
   post: Post;
   commentState: boolean;
   setCommentState: Dispatch<SetStateAction<boolean>>;

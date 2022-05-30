@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePost, updatePost, updateUserPost } from "reducers/postsSlice";
 import { Grid as Loader } from "react-loader-spinner";
 import { RootState } from "store";
-import { setUser } from "reducers/userSlice";
 import TextareaAutosize from "react-textarea-autosize";
 import { PostHeader } from "./PostHeader";
 import { PostCta } from "./PostCta";
@@ -25,7 +24,6 @@ export const PostCard: FC<PostProps> = ({ post }) => {
   const [comment, setComment] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.user as User);
-
   const { loading, operation } = useAxios();
   const { sendToast } = useToast();
 
@@ -46,31 +44,6 @@ export const PostCard: FC<PostProps> = ({ post }) => {
       dispatch(updateUserPost(updatedPost));
     }
     setComment("");
-  };
-
-  const handleLikePost = async () => {
-    const response = await operation({
-      method: "put",
-      url: "/like",
-      data: { postId: post._id },
-    });
-    const updatedPost = response as unknown as Post;
-    if (post.owner._id !== user._id) {
-      dispatch(updatePost(updatedPost));
-    } else {
-      dispatch(updateUserPost(updatedPost));
-    }
-  };
-
-  const handleBookmarkPost = async () => {
-    const response = await operation({
-      method: "put",
-      url: "/bookmark",
-      data: { postId: post._id },
-    });
-
-    const updatedUser = response as unknown as User;
-    dispatch(setUser(updatedUser));
   };
 
   const OpenEditModal = () => {
@@ -119,12 +92,7 @@ export const PostCard: FC<PostProps> = ({ post }) => {
             <img src={post.photo} alt={post.caption} className="post_img" />
           </div>
         </Link>
-        <PostCta
-          user={user}
-          post={post}
-          handleLikePost={handleLikePost}
-          handleBookmarkPost={handleBookmarkPost}
-        />
+        <PostCta user={user} post={post} />
         <div className="likes_comments_wrapper">
           <p className="post_likes">{`${post.likes.length} ${
             post.likes.length === 1 ? "like" : "likes"
@@ -138,6 +106,7 @@ export const PostCard: FC<PostProps> = ({ post }) => {
             {new Date(post.timestamp).toLocaleString()}
           </div>
           <PostComments
+            user={user}
             post={post}
             commentState={commentState}
             setCommentState={setCommentState}

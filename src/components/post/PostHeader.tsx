@@ -1,7 +1,8 @@
 import { MiOptionsVertical } from "assets/Icons";
 import { PostHeaderProps } from "Interfaces";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useOnClickOutside } from "utils";
 
 export const PostHeader: FC<PostHeaderProps> = ({
   user,
@@ -11,6 +12,9 @@ export const PostHeader: FC<PostHeaderProps> = ({
   OpenEditModal,
   handleDeletePost,
 }) => {
+  const headerRef = useRef(null);
+  useOnClickOutside(headerRef, () => setEditDeleteOptions(false));
+
   return (
     <div className="post_header">
       <Link to={`/${post.owner.username}`}>
@@ -22,7 +26,7 @@ export const PostHeader: FC<PostHeaderProps> = ({
         <div className="post_owner_username">{post.owner.username}</div>
       </Link>
       {post.owner._id === user._id && (
-        <>
+        <div ref={headerRef}>
           <button
             className="post_options_btn"
             onClick={() => setEditDeleteOptions((o) => !o)}
@@ -35,7 +39,7 @@ export const PostHeader: FC<PostHeaderProps> = ({
               <button onClick={handleDeletePost}>Delete</button>
             </div>
           )}
-        </>
+        </div>
       )}
     </div>
   );

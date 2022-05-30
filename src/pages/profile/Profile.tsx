@@ -1,21 +1,34 @@
-import { Post } from "Interfaces";
-import { FC, useEffect, useRef } from "react";
+import { Post, User } from "Interfaces";
+import { FC, useEffect, useRef, useState } from "react";
 import { Grid as Loader } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userPosts } from "reducers/postsSlice";
 import { setUser } from "reducers/userSlice";
 import { RootState } from "store";
-import { useAxios } from "utils";
+import { useAxios, useOnClickOutside } from "utils";
 import "./profile.css";
+import { ToggleFollow } from "./ToggleFollow";
 
 export const Profile: FC = () => {
+  const [ffUsers, setFfUsers] = useState<User[]>([]);
+  const [ffUsersModal, setFfUsersModal] = useState({
+    state: false,
+    usersType: "",
+  });
   const { user } = useSelector((user: RootState) => user.user);
   const posts = useSelector((state: RootState) => state.posts.userPosts);
   const { loading, operation } = useAxios();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const fileInput = useRef<HTMLInputElement>(null);
+  const modalRef = useRef(null);
+  useOnClickOutside(modalRef, () =>
+    setFfUsersModal({
+      state: false,
+      usersType: "",
+    })
+  );
 
   useEffect(() => {
     if (user && posts.length === 0) {
@@ -24,12 +37,28 @@ export const Profile: FC = () => {
           method: "get",
           url: "/posts",
         });
-        const newPosts = response.posts as unknown as Post[];
+        const newPosts = response.posts as Post[];
         dispatch(userPosts(newPosts));
       })();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
+
+  const showFollowingFollowers = async (following: boolean) => {
+    const response = await operation({
+      method: "post",
+      url: "/users",
+      data: { userList: following ? user?.following : user?.followers },
+    });
+    const users = response?.users as User[];
+    if (users.length > 0) {
+      setFfUsers(users);
+      setFfUsersModal({
+        state: true,
+        usersType: following ? "following" : "followers",
+      });
+    }
+  };
 
   const handleEditProfile = () => {
     user && navigate(`/${user.username}/edit`);
@@ -38,6 +67,12 @@ export const Profile: FC = () => {
   const handleProfilePic = () => {
     fileInput.current?.click();
   };
+
+  const websiteToShow = user?.website.includes("http://")
+    ? user?.website.split("http://")[1]
+    : user?.website.includes("https://")
+    ? user?.website.split("https://")[1]
+    : user?.website;
 
   const handleImageSelected = async () => {
     if (fileInput.current?.files) {
@@ -95,10 +130,10 @@ export const Profile: FC = () => {
                 <button onClick={handleEditProfile}>Edit Profile</button>
               </div>
               <div className="following_followers">
-                <p>
+                <p onClick={() => showFollowingFollowers(true)}>
                   <span>{user.following.length}</span> following
                 </p>
-                <p>
+                <p onClick={() => showFollowingFollowers(false)}>
                   <span>{user.followers.length}</span> followers
                 </p>
               </div>
@@ -111,7 +146,13 @@ export const Profile: FC = () => {
                   {user.website === "" ? (
                     "no website"
                   ) : (
-                    <a href={user.website}>{user.website}</a>
+                    <a
+                      href={`http://${websiteToShow}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {websiteToShow}
+                    </a>
                   )}
                 </div>
               </div>
@@ -143,6 +184,22 @@ export const Profile: FC = () => {
             </div>
           )}
         </>
+      )}
+      {user && ffUsersModal.state && (
+        <div className="user_follow_list_wrapper">
+          <div className="user_follow_list_content" ref={modalRef}>
+            <div className="user_follow_list_title">
+              {ffUsersModal.usersType}
+            </div>
+            {ffUsers.map((otherUser) => (
+              <ToggleFollow
+                key={otherUser._id}
+                user={user}
+                otherUser={otherUser}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </div>
   );

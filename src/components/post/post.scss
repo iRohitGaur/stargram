@@ -144,17 +144,31 @@
       }
 
       .comment_wrapper {
-        @include flex(1rem, null, center);
-        padding: 5px 0;
+        @include flex(1rem, null, center, space-between);
 
-        img {
-          height: 24px;
-          width: 24px;
-          border-radius: 50%;
+        .comment_section {
+          @include flex(1rem, null, center);
+          padding: 5px 0;
+
+          img {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+          }
+
+          p {
+            word-break: break-all;
+          }
         }
-
-        p {
-          word-break: break-all;
+        .delete_btn {
+          @include flex(1rem, null, center);
+          background: none;
+          border: none;
+          padding: 2px;
+          cursor: pointer;
+        }
+        .delete_btn:hover {
+          transform: scale(1.1);
         }
       }
     }
