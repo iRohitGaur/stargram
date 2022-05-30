@@ -17,10 +17,9 @@ const userSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
     },
-    logout(state) {
+    logout() {
       localStorage.removeItem("stargram-user-token");
-      state.user = null;
-      state.token = null;
+      return { ...initialState };
     },
   },
 });

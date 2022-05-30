@@ -20,6 +20,9 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
+    resetPosts() {
+      return { ...initialState };
+    },
     userPosts(state, action: PayloadAction<Post[]>) {
       state.userPosts = action.payload;
     },
@@ -69,6 +72,7 @@ const postsSlice = createSlice({
 });
 
 export const {
+  resetPosts,
   userPosts,
   addNewPost,
   timelinePosts,

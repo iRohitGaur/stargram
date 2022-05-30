@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import { logout } from "reducers/userSlice";
 import { useOnClickOutside } from "utils";
+import { resetPosts } from "reducers/postsSlice";
 
 export const Nav: FC = () => {
   const [toggleProfile, setToggleProfile] = useState(false);
@@ -36,6 +37,7 @@ export const Nav: FC = () => {
 
   const handleLogout = () => {
     handleProfileToggle();
+    dispatch(resetPosts());
     dispatch(logout());
   };
 

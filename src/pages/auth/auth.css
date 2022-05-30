@@ -2,17 +2,16 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.auth_page .auth_lottie_wrapper {
+  max-width: 700px;
 }
 
 .auth_wrapper {
-  background: var(--BG-COMPONENTS);
-  border-radius: 4px;
-  width: 32rem;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border: 1px solid #ababab;
-  padding: 2rem 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -27,11 +26,28 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background: var(--BG-COMPONENTS);
+  border-radius: 8px;
+  width: 32rem;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border: 1px solid #ababab;
+  padding: 2rem 0;
   position: absolute;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+  opacity: 0.95;
+}
+
+.auth_wrapper h1 {
+  line-height: 1;
+}
+
+.auth_wrapper h4 {
+  text-align: center;
 }
 
 .auth_wrapper input {

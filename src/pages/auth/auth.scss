@@ -4,20 +4,34 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  display: grid;
+  place-items: center;
+
+  .auth_lottie_wrapper {
+    max-width: 700px;
+  }
 }
 
 .auth_wrapper {
+  @include flex(1rem, column, center, center);
   background: $bg-components;
-  border-radius: 4px;
+  border-radius: 8px;
   width: 32rem;
   height: fit-content;
   border: $border;
   padding: 2rem 0;
-  @include flex(1rem, column, center, center);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  opacity: 0.95;
+
+  h1 {
+    line-height: 1;
+  }
+  h4 {
+    text-align: center;
+  }
 
   input {
     background: $bg;
