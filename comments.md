@@ -27,6 +27,6 @@
     - OtherProfile.tsx
   - added:
     - ToggleFollow.tsx
-- update auth page
+- update auth page: add form tag
   - updated:
     - Auth.tsx

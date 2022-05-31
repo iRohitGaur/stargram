@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, SyntheticEvent } from "react";
 import { AuthProps, Input, User } from "Interfaces";
 import { isValidPassword } from "Validators";
 import { useAxios } from "utils";
@@ -25,14 +25,16 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
     setLoginForm((s) => ({ ...s, password: e.target.value }));
   };
 
-  const handleLogin = async (guest: boolean) => {
-    if (isValidPassword(password) || guest) {
+  const handleLogin = async (e?: SyntheticEvent) => {
+    e?.preventDefault();
+
+    if (isValidPassword(password)) {
       const response = await operation({
         method: "post",
         url: "/login",
         data: {
-          usernameOrEmail: guest ? "guest@rohit.xyz" : usernameOrEmail,
-          password: guest ? "guest@123" : password,
+          usernameOrEmail: usernameOrEmail,
+          password: password,
         },
       });
       const user = response.user as unknown as User;
@@ -57,7 +59,7 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
   }, [loading]);
 
   return (
-    <>
+    <form onSubmit={handleLogin}>
       <input
         className="input_username"
         type="text"
@@ -72,10 +74,19 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
         value={password}
         onChange={(e) => handlePassword(e)}
       />
-      <button className="stg_btn" onClick={() => handleLogin(false)}>
+      <button type="submit" className="stg_btn" onClick={handleLogin}>
         Login
       </button>
-      <button className="stg_btn" onClick={() => handleLogin(true)}>
+      <button
+        type="submit"
+        className="stg_btn"
+        onClick={() => {
+          setLoginForm({
+            usernameOrEmail: "guest@rohit.xyz",
+            password: "guest@123",
+          });
+        }}
+      >
         Use Guest Login
       </button>
       <p className="toggle_auth">
@@ -84,7 +95,7 @@ const Login: FC<AuthProps> = ({ toggleLogin, setLoading }) => {
           Signup
         </button>
       </p>
-    </>
+    </form>
   );
 };
 

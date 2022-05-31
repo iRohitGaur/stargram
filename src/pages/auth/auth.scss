@@ -26,6 +26,11 @@
   transform: translate(-50%, -50%);
   opacity: 0.95;
 
+  form {
+    @include flex(1rem, column, center, center);
+    width: 32rem;
+  }
+
   h1 {
     line-height: 1;
   }
