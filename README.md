@@ -84,7 +84,3 @@ REACT_APP_CLOUDINARY_API_URL=<cloudinary api url here>
 
 - Start the server
   `yarn start`
-
----
-
-#### Learning and Growing with [@neogcamp](https://twitter.com/neogcamp)
